@@ -572,7 +572,7 @@ public class GertecPrinter {
                 break;
 
             default:
-                retorno = "ERRO DESCONHECIDO"+status;
+                retorno = "ERRO DESCONHECIDO"+status.toString();
                 break;
         }
 

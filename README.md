@@ -1,1 +1,1 @@
-Projeto GertecOneFramework GPOS 700# pluginCordovaGPOS700
+Projeto GertecOneFramework GPOS 700
