@@ -3,6 +3,9 @@ var exec = require('cordova/exec');
 exports.checarImpressora = function (success, error) {
     exec(success, error, 'MainActivity', 'checarImpressora');
 };
+exports.beep = function (success, error) {
+    exec(success, error, 'MainActivity', 'beep');
+};
 
 exports.imprimir = function (params, success, error) {
     exec(success, error, 'MainActivity', 'imprimir', [params]);

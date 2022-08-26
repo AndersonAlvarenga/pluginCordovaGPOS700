@@ -23,6 +23,7 @@ import br.com.gertec.gedi.interfaces.IPRNTR;
 import br.com.gertec.gedi.structs.GEDI_PRNTR_st_BarCodeConfig;
 import br.com.gertec.gedi.structs.GEDI_PRNTR_st_PictureConfig;
 import br.com.gertec.gedi.structs.GEDI_PRNTR_st_StringConfig;
+import br.com.gertec.gedi.interfaces.IAUDIO;
 
 public class GertecPrinter {
   // Definições
@@ -578,4 +579,28 @@ public class GertecPrinter {
 
         return retorno;
     }
+
+    /**
+     * Método que retorna o atual estado da impressora
+     *
+     * @throws GediException = vai retorno o código do erro.
+     *
+     * @return String = traduzStatusImpressora()
+     *
+     * */
+    
+    public void Beep() throws GediException {
+        try {
+            iAudio.Beep();
+
+            btnIAUDIO.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_24dp, 0, 0, 0);
+            return "iAudio.Beep\t\t\t- OK";
+        } catch (Exception e) {
+            return "iAudio.Beep\t\t\t- FAIL";
+            btnIAUDIO.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_close_24dp, 0, 0, 0);
+        }
+    }
+
+   
+    
 }
