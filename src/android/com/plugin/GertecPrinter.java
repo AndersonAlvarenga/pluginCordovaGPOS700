@@ -506,6 +506,13 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
+    
+
+
+
+
+
+    //Metodo Testados e funcionando corretamente
      /**
      * Método Acender o led
      *
@@ -571,7 +578,6 @@ public class GertecPrinter {
 
                 try {
                     iLed.Set(c, true);
-                    return "iLed.Set - " + c + ":- OK";
                 } catch (GediException e) {
                     return "iLed.Set - " + c + ":\t- FAIL -- " + e.getErrorCode().name();
 
@@ -584,12 +590,6 @@ public class GertecPrinter {
         }
         return "Erro";
     }
-
-     
-   
-
-
-    //Metodo Testados e funcionando corretamente
 
      /**
      * Método que retorna o atual estado da impressora
@@ -635,8 +635,6 @@ public class GertecPrinter {
         }
     }
 
-   
-    
 
     //METODOS AUXILIARES
 
