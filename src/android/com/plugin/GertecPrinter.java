@@ -529,13 +529,12 @@ public class GertecPrinter {
 
     private String smartCardPowerOff() {
         try {
-
             for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
                 iSmart.PowerOff(c);
             }
 
         } catch (GediException gedi_e_ret) {
-            return "GediException";
+            return gedi_e_ret.getErrorCode().name().toString();
         } catch (Exception e) {
             return e.getMessage();
         }
