@@ -591,7 +591,7 @@ public class GertecPrinter {
      *
      * */
     
-    public void Beep() throws GediException {
+    public String Beep() throws GediException {
 
         try {
             iAudio = GEDI.getInstance().getAUDIO();
