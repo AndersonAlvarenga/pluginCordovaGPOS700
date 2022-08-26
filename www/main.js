@@ -27,6 +27,4 @@ exports.leitorNfcGedi = function (success, error) {
 exports.leitorNfcId = function (success, error) {
     exec(success, error, 'MainActivity', 'leitorNfcId');
 };
-exports.teste = function (success, error) {
-    exec(success, error, 'MainActivity', 'teste');
-};
+
