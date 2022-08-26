@@ -524,9 +524,9 @@ public class GertecPrinter {
             }
 
         } catch (GediException e) {
-            return e.getMessage;
+            return e.getMessage();
         } catch (Exception e) {
-            return e.getMessage;
+            return e.getMessage();
         }
 
         ledOn();
