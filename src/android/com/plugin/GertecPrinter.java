@@ -520,14 +520,14 @@ public class GertecPrinter {
             return "getSMART FAIL";
         }
 
-        return smartCardPowerOff(iSmart); 
+        return smartCardPowerOff(); 
     }
 
-    private String smartCardPowerOff(ISMART isMartInput) {
+    private String smartCardPowerOff() {
         
         try {
             for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
-                return c.toString();
+
                 iSmart.PowerOff(c);
             }
 
