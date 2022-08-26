@@ -42,6 +42,8 @@ public class GertecPrinter {
     private GEDI_PRNTR_st_StringConfig stringConfig;
     private GEDI_PRNTR_st_PictureConfig pictureConfig;
     private GEDI_PRNTR_e_Status status;
+    //Variaval beep
+    private IAUDIO iAudio;
 
     // Classe de configuração da impressão
     private ConfigPrint configPrint;
@@ -590,14 +592,18 @@ public class GertecPrinter {
      * */
     
     public void Beep() throws GediException {
-        try {
-            iAudio.Beep();
 
-            btnIAUDIO.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_check_24dp, 0, 0, 0);
-            return "iAudio.Beep\t\t\t- OK";
+        try {
+            iAudio = GEDI.getInstance().getAUDIO();
+            try {
+                iAudio.Beep();
+                return "iAudio.Beep\t\t\t- OK";
+            } catch (Exception e) {
+                return "iAudio.Beep\t\t\t- FAIL";
+            }
+            
         } catch (Exception e) {
-            return "iAudio.Beep\t\t\t- FAIL";
-            btnIAUDIO.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_close_24dp, 0, 0, 0);
+            return "getAUDIO\t\t\t- FAIL";
         }
     }
 
