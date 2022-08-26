@@ -524,8 +524,9 @@ public class GertecPrinter {
     }
 
     private String smartCardPowerOff(ISMART isMartInput) {
-        return GEDI_SMART_e_Slot.values().toString();
+        
         try {
+            return GEDI_SMART_e_Slot.values().toString();
             for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
                 iSmart.PowerOff(c);
             }
