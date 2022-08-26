@@ -516,18 +516,15 @@ public class GertecPrinter {
     public String setSmartCardPowerOff(){
         try {
             iSmart = GEDI.getInstance().getSMART();
-            System.out.println("getSMART\t\t\t- OK");
         } catch (Exception e) {
             return "getSMART FAIL";
         }
-        String statusSmartCardPowerOff = smartCardPowerOff(); 
-        if(statusSmartCardPowerOff != "ok"){
-            return statusSmartCardPowerOff;
-        }
-        return "OK";
+
+        return smartCardPowerOff(); 
     }
 
-    private String smartCardPowerOff() {
+    private String smartCardPowerOff(ISMART isMartInput) {
+        return GEDI_SMART_e_Slot.values().toString();
         try {
             for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
                 iSmart.PowerOff(c);
