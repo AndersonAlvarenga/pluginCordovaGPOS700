@@ -121,11 +121,11 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
-        if (action.equals("aguardaPagamento")) {
+        if (action.equals("setSmartCardPowerOff")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     try {
-                        status = gertecPrinter.aguardandoPagamento();
+                        status = gertecPrinter.setSmartCardPowerOff();
                         Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {

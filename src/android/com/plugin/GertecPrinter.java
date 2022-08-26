@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -27,6 +28,8 @@ import br.com.gertec.gedi.interfaces.IAUDIO;
 import br.com.gertec.gedi.interfaces.ILED;
 import br.com.gertec.gedi.interfaces.ICL;
 import br.com.gertec.gedi.enums.GEDI_LED_e_Id;
+import br.com.gertec.gedi.interfaces.ISMART;
+import br.com.gertec.gedi.enums.GEDI_SMART_e_Slot;
 
 public class GertecPrinter {
   // Definições
@@ -51,6 +54,10 @@ public class GertecPrinter {
     //Variaveis Led
     private ILED iLed;
     private ICL iCl;
+
+    //Variaveis Pagamento
+    private ISMART iSmart;
+
 
     // Classe de configuração da impressão
     private ConfigPrint configPrint;
@@ -506,8 +513,34 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
-    
+    public String setSmartCardPowerOff(){
+        try {
+            iSmart = GEDI.getInstance().getSMART();
+            System.out.println("getSMART\t\t\t- OK");
+        } catch (Exception e) {
+            return "getSMART FAIL";
+        }
+        String statusSmartCardPowerOff = smartCardPowerOff(); 
+        if(statusSmartCardPowerOff != "ok"){
+            return statusSmartCardPowerOff;
+        }
+        return "OK";
+    }
 
+    private String smartCardPowerOff() {
+        try {
+
+            for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
+                iSmart.PowerOff(c);
+            }
+
+        } catch (GediException gedi_e_ret) {
+            return "GediException";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "ok";
+    }
 
 
 

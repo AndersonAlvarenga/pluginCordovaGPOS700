@@ -33,7 +33,7 @@ exports.leitorNfcId = function (success, error) {
 exports.led = function (success, error) {
     exec(success, error, 'MainActivity', 'led');
 };
-exports.aguardaPagamento = function (success, error) {
-    exec(success, error, 'MainActivity', 'aguardaPagamento');
+exports.setSmartCardPowerOff = function (success, error) {
+    exec(success, error, 'MainActivity', 'setSmartCardPowerOff');
 };
 
