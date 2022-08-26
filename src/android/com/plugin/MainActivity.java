@@ -90,6 +90,21 @@ public class MainActivity extends CordovaPlugin {
             });
             return true;
         }
+        if (action.equals("led")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = gertecPrinter. led();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
         if (action.equals("beep")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {

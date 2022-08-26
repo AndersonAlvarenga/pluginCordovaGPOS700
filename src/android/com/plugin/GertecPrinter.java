@@ -24,6 +24,9 @@ import br.com.gertec.gedi.structs.GEDI_PRNTR_st_BarCodeConfig;
 import br.com.gertec.gedi.structs.GEDI_PRNTR_st_PictureConfig;
 import br.com.gertec.gedi.structs.GEDI_PRNTR_st_StringConfig;
 import br.com.gertec.gedi.interfaces.IAUDIO;
+import br.com.gertec.gedi.interfaces.ILED;
+import br.com.gertec.gedi.interfaces.ICL;
+import br.com.gertec.gedi.enums.GEDI_LED_e_Id;
 
 public class GertecPrinter {
   // Definições
@@ -44,6 +47,10 @@ public class GertecPrinter {
     private GEDI_PRNTR_e_Status status;
     //Variaval beep
     private IAUDIO iAudio;
+
+    //Variaveis Led
+    private ILED iLed;
+    private ICL iCl;
 
     // Classe de configuração da impressão
     private ConfigPrint configPrint;
@@ -130,25 +137,6 @@ public class GertecPrinter {
         }
 
         this.stringConfig.paint.setTypeface(this.typeface);
-    }
-
-    /**
-     * Método que retorna o atual estado da impressora
-     *
-     * @throws GediException = vai retorno o código do erro.
-     *
-     * @return String = traduzStatusImpressora()
-     *
-     * */
-    public String getStatusImpressora() throws GediException {
-        try {
-            ImpressoraInit();
-            this.status = this.iPrint.Status();
-        } catch (GediException e) {
-            throw new GediException(e.getErrorCode());
-        }
-
-        return traduzStatusImpressora(this.status);
     }
 
     /**
@@ -480,41 +468,7 @@ public class GertecPrinter {
 
     }
 
-    /**
-     * Método que faz o avanço de linhas após uma impressão.
-     *
-     * @param linhas = Número de linhas que dever ser pulado após a impressão.
-     *
-     * @throws GediException = retorna o código do erro.
-     *
-     * @apiNote = Esse método não deve ser chamado dentro de um FOR ou WHILE,
-     * o número de linhas deve ser sempre passado no atributo do método.
-     *
-     * */
-    public void avancaLinha(int linhas) throws GediException {
-        try {
-            if(linhas > 0){
-                this.iPrint.DrawBlankLine(linhas);
-            }
-        } catch (GediException e) {
-           throw new GediException(e.getErrorCode());
-        }
-    }
-
-    /**
-     * Método que retorno se a impressora está apta a fazer impressões
-     *
-     * @return true = quando estiver tudo ok.
-     *
-     * */
-    public boolean isImpressoraOK(){
-
-        if( status.getValue() == 0 ){
-            return true;
-        }
-        return false;
-    }
-
+    
     /**
      * Método que faz a inicialização da impressao
      *
@@ -551,6 +505,139 @@ public class GertecPrinter {
         }
     }
 
+    //MetodosTesting
+     /**
+     * Método Acender o led
+     *
+     * @throws GediException = vai retorno o código do erro.
+     *
+     * @return String
+     *
+     * */
+    public String led() {
+
+        try {
+            iLed = GEDI.getInstance().getLED();
+
+            if (iLed == null) {
+                throw new GediException(10800);
+            }
+
+        } catch (GediException e) {
+            return e.getMessage;
+        } catch (Exception e) {
+            return e.getMessage;
+        }
+
+        ledOn();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            return e.printStackTrace();
+        }
+
+        ledOff();
+
+        return "Ok";
+    }  
+
+    private String ledOff() {
+        for (GEDI_LED_e_Id c : GEDI_LED_e_Id.values()) {
+
+            if (c.equals(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_RED) ||
+                    c.equals(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_GREEN) ||
+                    c.equals(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_ORANGE) ||
+                    c.equals(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_BLUE)) {
+                try {
+                    iLed.Set(c, false);
+                    return "iLed.Set - " + c + ":- OK";
+                } catch (GediException e) {
+                    return "iLed.Set - " + c + ":- FAIL -- " + e.getErrorCode().name();
+                } catch (Exception e) {
+                    return "iLed.Set - \t\t\t- FAIL - " + e.getMessage();
+                }
+            }
+        }
+    }
+
+    private String ledOn() {
+        for (GEDI_LED_e_Id c : GEDI_LED_e_Id.values()) {
+
+            if (c.equals(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_RED) ||
+                    c.equals(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_GREEN) ||
+                    c.equals(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_ORANGE) ||
+                    c.equals(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_BLUE)) {
+
+                try {
+                    iLed.Set(c, true);
+                    return "iLed.Set - " + c + ":- OK";
+                } catch (GediException e) {
+                    return "iLed.Set - " + c + ":\t- FAIL -- " + e.getErrorCode().name();
+
+                } catch (Exception e) {
+                    return "iLed.Set - \t- FAIL - " + e.getMessage();
+                }
+            }
+
+
+        }
+    }
+
+     
+   
+
+
+    //Metodo Testados e funcionando corretamente
+
+     /**
+     * Método que retorna o atual estado da impressora
+     *
+     * @throws GediException = vai retorno o código do erro.
+     *
+     * @return String = traduzStatusImpressora()
+     *
+     * */
+    public String getStatusImpressora() throws GediException {
+        try {
+            ImpressoraInit();
+            this.status = this.iPrint.Status();
+        } catch (GediException e) {
+            throw new GediException(e.getErrorCode());
+        }
+
+        return traduzStatusImpressora(this.status);
+    }
+
+    /**
+     * Metodo para Fazer um beep na impressora
+     *
+     * @throws GediException = vai retorno o código do erro.
+     *
+     * @return String 
+     *
+     * */
+    
+    public String Beep() throws GediException {
+
+        try {
+            iAudio = GEDI.getInstance().getAUDIO();
+            try {
+                iAudio.Beep();
+                return "iAudio.Beep - OK";
+            } catch (Exception e) {
+                return "iAudio.Beep - FAIL";
+            }
+            
+        } catch (Exception e) {
+            return "getAUDIO - FAIL";
+        }
+    }
+
+   
+    
+
+    //METODOS AUXILIARES
+
     /**
      * Método que faz a tradução do status atual da impressora.
      *
@@ -583,30 +670,39 @@ public class GertecPrinter {
     }
 
     /**
-     * Método que retorna o atual estado da impressora
+     * Método que faz o avanço de linhas após uma impressão.
      *
-     * @throws GediException = vai retorno o código do erro.
+     * @param linhas = Número de linhas que dever ser pulado após a impressão.
      *
-     * @return String = traduzStatusImpressora()
+     * @throws GediException = retorna o código do erro.
+     *
+     * @apiNote = Esse método não deve ser chamado dentro de um FOR ou WHILE,
+     * o número de linhas deve ser sempre passado no atributo do método.
      *
      * */
-    
-    public String Beep() throws GediException {
-
+    public void avancaLinha(int linhas) throws GediException {
         try {
-            iAudio = GEDI.getInstance().getAUDIO();
-            try {
-                iAudio.Beep();
-                return "iAudio.Beep - OK";
-            } catch (Exception e) {
-                return "iAudio.Beep - FAIL";
+            if(linhas > 0){
+                this.iPrint.DrawBlankLine(linhas);
             }
-            
-        } catch (Exception e) {
-            return "getAUDIO - FAIL";
+        } catch (GediException e) {
+           throw new GediException(e.getErrorCode());
         }
     }
 
-   
-    
+    /**
+     * Método que retorno se a impressora está apta a fazer impressões
+     *
+     * @return true = quando estiver tudo ok.
+     *
+     * */
+    public boolean isImpressoraOK(){
+
+        if( status.getValue() == 0 ){
+            return true;
+        }
+        return false;
+    }
+
+
 }
