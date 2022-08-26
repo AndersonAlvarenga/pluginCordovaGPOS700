@@ -558,6 +558,7 @@ public class GertecPrinter {
                 }
             }
         }
+        return "Erro";
     }
 
     private String ledOn() {
@@ -581,6 +582,7 @@ public class GertecPrinter {
 
 
         }
+        return "Erro";
     }
 
      
