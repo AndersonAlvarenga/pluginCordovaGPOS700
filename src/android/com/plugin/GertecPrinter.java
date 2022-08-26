@@ -597,13 +597,13 @@ public class GertecPrinter {
             iAudio = GEDI.getInstance().getAUDIO();
             try {
                 iAudio.Beep();
-                return "iAudio.Beep\t\t\t- OK";
+                return "iAudio.Beep - OK";
             } catch (Exception e) {
-                return "iAudio.Beep\t\t\t- FAIL";
+                return "iAudio.Beep - FAIL";
             }
             
         } catch (Exception e) {
-            return "getAUDIO\t\t\t- FAIL";
+            return "getAUDIO - FAIL";
         }
     }
 
