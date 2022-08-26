@@ -520,7 +520,7 @@ public class GertecPrinter {
             return "getSMART FAIL";
         }
 
-        return smartCardPowerOff(); 
+        return smartCardPowerOff(iSmart); 
     }
 
     private String smartCardPowerOff(ISMART isMartInput) {
