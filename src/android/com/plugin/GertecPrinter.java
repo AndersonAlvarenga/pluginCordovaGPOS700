@@ -533,7 +533,7 @@ public class GertecPrinter {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            return e.printStackTrace();
+            return e.getMessage();
         }
 
         ledOff();
