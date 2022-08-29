@@ -57,6 +57,7 @@ public class GertecPrinter {
 
     //Variaveis Pagamento
     private ISMART iSmart;
+    private StringBuilder sb;
 
     // Classe de configuração da impressão
     private ConfigPrint configPrint;
