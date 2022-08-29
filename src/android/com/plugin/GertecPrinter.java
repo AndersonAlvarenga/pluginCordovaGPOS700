@@ -58,7 +58,7 @@ public class GertecPrinter {
 
     //Variaveis Pagamento
     private ISMART iSmart;
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     private Handler handler = new Handler();
 
 
@@ -543,7 +543,7 @@ public class GertecPrinter {
         }  
 
 
-        
+
         try {
 
             boolean isThread = true;
