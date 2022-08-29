@@ -515,30 +515,29 @@ public class GertecPrinter {
     //MetodosTesting
 
     public String setSmartCardPowerOff(){
+        int index = 0;
         try {
             iSmart = GEDI.getInstance().getSMART();
+            try {
+                for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
+                    //iSmart.PowerOff(c);
+                    index+=1;
+                }
+    
+            } catch (GediException gedi_e_ret) {
+                return gedi_e_ret.getErrorCode().name().toString();
+            } catch (Exception e) {
+                return e.getMessage();
+            }        
+            return "Quantidade "+index;
         } catch (Exception e) {
             return "getSMART FAIL";
         }
 
-        return "iSmart ok"; 
+        return "iSmart saiu"; 
     }
 
-    private String smartCardPowerOff() {
-        
-        try {
-            for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
-
-                iSmart.PowerOff(c);
-            }
-
-        } catch (GediException gedi_e_ret) {
-            return gedi_e_ret.getErrorCode().name().toString();
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-        return "ok";
-    }
+    
 
 
 
