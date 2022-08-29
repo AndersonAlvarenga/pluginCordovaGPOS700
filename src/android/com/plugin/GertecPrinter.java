@@ -556,7 +556,7 @@ public class GertecPrinter {
         }  
 
         
-
+        return "Ativado";
     }
 
     
