@@ -522,15 +522,14 @@ public class GertecPrinter {
         } catch (Exception e) {
             return "getSMART FAIL";
         }
-        
+
         try {
             for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
                 //iSmart.PowerOff(c);
                 index+=1;
             }
 
-        } catch (GediException gedi_e_ret) {
-            return gedi_e_ret.getErrorCode().name().toString();
+        
         } catch (Exception e) {
             return e.getMessage();
         }        
