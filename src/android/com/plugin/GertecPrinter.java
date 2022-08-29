@@ -547,7 +547,7 @@ public class GertecPrinter {
 
 
             } catch (Exception e) {
-                System.out.println("iSmart.Status\t\t\t- FAIL - " + e.getMessage());
+                System.out.println("iSmart.Status- FAIL - " + e.getMessage());
             }
         }
 
