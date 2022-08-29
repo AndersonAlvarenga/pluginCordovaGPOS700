@@ -535,12 +535,12 @@ public class GertecPrinter {
         }  
 
         sb = new StringBuilder();
-        for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
+        for (GEDI_SMART_e_Slot cd : GEDI_SMART_e_Slot.values()) {
 
             try {
 
-                GEDI_SMART_e_Status status = iSmart.Status(c);
-                final String r = String.format("iSmart - Status - %s:\t%s\n", c, status);
+                GEDI_SMART_e_Status status = iSmart.Status(cd);
+                final String r = String.format("iSmart - Status - ", cd, status);
                 System.out.printf(r);
 
                 sb.append(r);
