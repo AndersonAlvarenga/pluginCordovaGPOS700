@@ -513,6 +513,7 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
+    
     public String setSmartCardPowerOff(){
         try {
             iSmart = GEDI.getInstance().getSMART();
@@ -543,6 +544,8 @@ public class GertecPrinter {
 
 
     //Metodo Testados e funcionando corretamente
+
+    //-------------------Metodos Led------------------
      /**
      * Método Acender o led
      *
@@ -587,7 +590,6 @@ public class GertecPrinter {
                     c.equals(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_BLUE)) {
                 try {
                     iLed.Set(c, false);
-                    return "iLed.Set - " + c + ":- OK";
                 } catch (GediException e) {
                     return "iLed.Set - " + c + ":- FAIL -- " + e.getErrorCode().name();
                 } catch (Exception e) {
@@ -620,7 +622,7 @@ public class GertecPrinter {
         }
         return "Erro";
     }
-
+    //----------------Fim metodos Led------------------
      /**
      * Método que retorna o atual estado da impressora
      *
