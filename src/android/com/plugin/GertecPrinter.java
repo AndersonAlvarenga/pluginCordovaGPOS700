@@ -534,7 +534,6 @@ public class GertecPrinter {
             return "getSMART FAIL";
         }
 
-        return "iSmart saiu"; 
     }
 
     
