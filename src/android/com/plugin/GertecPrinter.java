@@ -513,7 +513,7 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
-    
+
     public String setSmartCardPowerOff(){
         try {
             iSmart = GEDI.getInstance().getSMART();
@@ -521,7 +521,7 @@ public class GertecPrinter {
             return "getSMART FAIL";
         }
 
-        return smartCardPowerOff(); 
+        return "iSmart ok"; 
     }
 
     private String smartCardPowerOff() {
