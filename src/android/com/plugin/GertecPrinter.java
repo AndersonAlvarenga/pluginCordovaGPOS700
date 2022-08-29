@@ -541,8 +541,8 @@ public class GertecPrinter {
             try {
 
                 GEDI_SMART_e_Status status = iSmart.Status(cd);
-                final String r = String.format("iSmart - Status - ", cd, status);
-                System.out.printf(r);
+                final String r = "Status: "+status;
+
 
                 sb.append(r);
 
