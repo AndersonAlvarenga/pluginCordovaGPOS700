@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.app.ProgressDialog;
 
 
 import com.google.zxing.BarcodeFormat;
@@ -57,6 +58,8 @@ public class GertecPrinter {
 
     //Variaveis Pagamento
     private ISMART iSmart;
+    ProgressDialog progressDialog;
+    private Handler handler = new Handler();
 
 
     // Classe de configuração da impressão
@@ -515,7 +518,11 @@ public class GertecPrinter {
     //MetodosTesting
 
     public String setSmartCardPowerOff(){
-        int index = 0;
+        progressDialog = new ProgressDialog(GertecPrinter.this);
+
+        progressDialog.setTitle("ISMART");
+        progressDialog.setMessage("INSIRA UM CARTÃO...");
+
         try {
             iSmart = GEDI.getInstance().getSMART();
             
@@ -527,15 +534,50 @@ public class GertecPrinter {
             for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
                 try{
                     iSmart.PowerOff(c);
-                    index+=1;
                 }catch(Exception e){
 
                 }
             }
         } catch (Exception e) {
             return e.getMessage();
-        }        
-        return "Quantidade "+index;
+        }  
+
+
+        
+        try {
+
+            boolean isThread = true;
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.show();
+                        }
+                    });
+                }
+            }).start();
+
+
+            while (isThread == true) {
+                if (iSmart.Status(GEDI_SMART_e_Slot.USER) == GEDI_SMART_e_Status.PRESENT) {
+                    isThread = false;
+                    progressDialog.dismiss();
+                }
+
+            }
+            
+
+        } catch (Exception e) {
+           return e.getMessage();
+
+        }
+        
+        
+
+       
 
     }
 
