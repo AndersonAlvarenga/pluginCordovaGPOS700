@@ -30,6 +30,7 @@ import br.com.gertec.gedi.interfaces.ICL;
 import br.com.gertec.gedi.enums.GEDI_LED_e_Id;
 import br.com.gertec.gedi.interfaces.ISMART;
 import br.com.gertec.gedi.enums.GEDI_SMART_e_Slot;
+import br.com.gertec.gedi.enums.GEDI_SMART_e_Status;
 
 public class GertecPrinter {
   // Definições
