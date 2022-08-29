@@ -58,9 +58,6 @@ public class GertecPrinter {
 
     //Variaveis Pagamento
     private ISMART iSmart;
-    private ProgressDialog progressDialog;
-    private Handler handler = new Handler();
-
 
     // Classe de configuração da impressão
     private ConfigPrint configPrint;
@@ -542,42 +539,25 @@ public class GertecPrinter {
             return e.getMessage();
         }  
 
+        sb = new StringBuilder();
+        for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
+
+            try {
+
+                GEDI_SMART_e_Status status = iSmart.Status(c);
+                final String r = String.format("iSmart - Status - %s:\t%s\n", c, status);
+                System.out.printf(r);
+
+                sb.append(r);
 
 
-        try {
-
-            boolean isThread = true;
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialog.show();
-                        }
-                    });
-                }
-            }).start();
-
-
-            while (isThread == true) {
-                if (iSmart.Status(GEDI_SMART_e_Slot.USER) == GEDI_SMART_e_Status.PRESENT) {
-                    isThread = false;
-                    progressDialog.dismiss();
-                }
-
+            } catch (Exception e) {
+                System.out.println("iSmart.Status\t\t\t- FAIL - " + e.getMessage());
             }
-            
-
-        } catch (Exception e) {
-           return e.getMessage();
-
         }
-        
-        
 
-       
+        return "SB: "+sb.toString();
+        
 
     }
 
