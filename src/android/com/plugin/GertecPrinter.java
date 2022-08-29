@@ -525,11 +525,9 @@ public class GertecPrinter {
 
         try {
             for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
-                //iSmart.PowerOff(c);
+                iSmart.PowerOff(c);
                 index+=1;
             }
-
-        
         } catch (Exception e) {
             return e.getMessage();
         }        
