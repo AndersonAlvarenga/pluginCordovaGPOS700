@@ -36,4 +36,7 @@ exports.led = function (success, error) {
 exports.setSmartCardPowerOff = function (success, error) {
     exec(success, error, 'MainActivity', 'setSmartCardPowerOff');
 };
+exports.checkISmart = function (success, error) {
+    exec(success, error, 'MainActivity', 'checkISmart');
+};
 

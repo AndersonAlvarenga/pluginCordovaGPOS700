@@ -514,7 +514,27 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
+    public String checkISmart(){
+        
+        sb = new StringBuilder();
+        for (GEDI_SMART_e_Slot cd : GEDI_SMART_e_Slot.values()) {
 
+            try {
+
+                GEDI_SMART_e_Status status = iSmart.Status(cd);
+                final String r = "Status: "+status;
+
+
+                sb.append(r);
+
+
+            } catch (Exception e) {
+                System.out.println("iSmart.Status- FAIL - " + e.getMessage());
+            }
+        }
+
+        return "SB: "+sb.toString();
+    }
     public String setSmartCardPowerOff(){
         try {
             iSmart = GEDI.getInstance().getSMART();
@@ -535,24 +555,6 @@ public class GertecPrinter {
             return e.getMessage();
         }  
 
-        sb = new StringBuilder();
-        for (GEDI_SMART_e_Slot cd : GEDI_SMART_e_Slot.values()) {
-
-            try {
-
-                GEDI_SMART_e_Status status = iSmart.Status(cd);
-                final String r = "Status: "+status;
-
-
-                sb.append(r);
-
-
-            } catch (Exception e) {
-                System.out.println("iSmart.Status- FAIL - " + e.getMessage());
-            }
-        }
-
-        return "SB: "+sb.toString();
         
 
     }
