@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.app.ProgressDialog;
 
 
 import com.google.zxing.BarcodeFormat;
@@ -515,11 +514,6 @@ public class GertecPrinter {
     //MetodosTesting
 
     public String setSmartCardPowerOff(){
-        progressDialog = new ProgressDialog(GertecPrinter.this);
-
-        progressDialog.setTitle("ISMART");
-        progressDialog.setMessage("INSIRA UM CARTÃO...");
-
         try {
             iSmart = GEDI.getInstance().getSMART();
             
