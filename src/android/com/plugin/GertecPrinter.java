@@ -535,9 +535,9 @@ public class GertecPrinter {
         } catch (Exception e) {
             return "iCl.PowerOn - FAIL - " + e.getMessage();
         }
-        
+
         try {
-            progressDialog = new ProgressDialog(GertecPrinter.this); 
+            progressDialog = new ProgressDialog(); 
         } catch (Exception e) {
             return "progressDialog - FAIL - " + e.getMessage();
         }
