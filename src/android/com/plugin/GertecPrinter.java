@@ -574,14 +574,14 @@ public class GertecPrinter {
             // TODO: handle exception
             return e.getMessage();
         }
-        byte[] abUID = pollingInfo[0].abUID;
+        /*byte[] abUID = pollingInfo[0].abUID;
         UID = arrayBytesToString(abUID);
         key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
         key.abValue = new byte[]{0x0f, 0x1a, 0x2c, 0x33}; //Cartão Gertec
         key.abValue = new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF}; // Cartão Cliente
         key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
-        byte[] blockInfo = null;
-        return pollingInfo[0].toString();
+        byte[] blockInfo = null;*/
+        return "OK";
     }
 
 
