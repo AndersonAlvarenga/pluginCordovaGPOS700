@@ -581,7 +581,7 @@ public class GertecPrinter {
         key.abValue = new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF}; // Cartão Cliente
         key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
         byte[] blockInfo = null;*/
-        return pollingInfo[0].peType;
+        return pollingInfo[0].peType.toString();
     }
 
 
