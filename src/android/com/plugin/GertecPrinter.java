@@ -34,6 +34,7 @@ import br.com.gertec.gedi.enums.GEDI_SMART_e_Slot;
 import br.com.gertec.gedi.enums.GEDI_SMART_e_Status;
 import br.com.gertec.gedi.structs.GEDI_CL_st_ISO_PollingInfo;
 import br.com.gertec.gedi.structs.GEDI_CL_st_MF_Key;
+import br.com.gertec.gedi.enums.GEDI_CL_e_MF_KeyType;
 
 public class GertecPrinter {
   // Definições
