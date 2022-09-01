@@ -590,7 +590,7 @@ public class GertecPrinter {
                                 iCl.MF_Authentication(i, key, key.abValue);
 
 
-                                blockInfo = GEDI.getInstance(getApplicationContext()).getCL().MF_BlockRead(i);
+                                blockInfo = GEDI.getInstance().getCL().MF_BlockRead(i);
                             } catch (GediException e) {
                                 if (e.toString().contains("252")) {
                                     System.out.println("iCl.GEDI Exception - Senha Errada!!!! - " + e);
