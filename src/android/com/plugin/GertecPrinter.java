@@ -569,11 +569,14 @@ public class GertecPrinter {
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
         try {
             pollingInfo[0] = iCl.ISO_Polling(5 * 1000);
+            byte[] abUID = pollingInfo[0].abUID;
+            String UID = arrayBytesToString(abUID);
         } catch (Exception e) {
             // TODO: handle exception
             return e.getMessage();
         }
-        return "ok";
+
+        return UID;
     }
 
 
