@@ -651,7 +651,7 @@ public class GertecPrinter {
 
         }).start();
 
-
+        return "ok";
     }
 
 
