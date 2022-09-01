@@ -565,12 +565,11 @@ public class GertecPrinter {
     }
 
     public String contactless(){
-        CordovaInterface cordova;
         final GEDI_CL_st_ISO_PollingInfo[] pollingInfo = new GEDI_CL_st_ISO_PollingInfo[1];
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
         new Thread(new Runnable() {
             @Override
-            public void run() {
+            public run() {
 
                     try {
 
@@ -580,8 +579,7 @@ public class GertecPrinter {
                         byte[] abUID = pollingInfo[0].abUID;
                         String UID = arrayBytesToString(abUID);
                         System.out.println("iCl.PollingInfo UID: " + UID);
-                        Toast.makeText(cordova.getActivity(), "iCl.PollingInfo UID: " + UID, Toast.LENGTH_LONG).show();
-
+                        return "iCl.PollingInfo UID: " + UID;
                         key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
                         key.abValue = new byte[]{0x0f, 0x1a, 0x2c, 0x33}; //Cartão Gertec
                         key.abValue = new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF}; // Cartão Cliente
@@ -601,10 +599,8 @@ public class GertecPrinter {
                             } catch (GediException e) {
                                 if (e.toString().contains("252")) {
                                     System.out.println("iCl.GEDI Exception - Senha Errada!!!! - " + e);
-                                    
                                 } else {
                                     System.out.println("iCl.read error: " + e);
-                                   
                                 }
                                 e.printStackTrace();
                             }
