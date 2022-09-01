@@ -536,26 +536,6 @@ public class GertecPrinter {
             return "iCl.PowerOn - FAIL - " + e.getMessage();
         }
 
-        try {
-            progressDialog = new ProgressDialog(); 
-        } catch (Exception e) {
-            return "progressDialog - FAIL - " + e.getMessage();
-        }
-        
-        progressDialog.setTitle("ICL");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog.show();
-                    }
-                });
-            }
-        }).run();
-
-
         return "Ativado";
     }
 
@@ -576,7 +556,104 @@ public class GertecPrinter {
         return "Desativado";
     }
 
-    
+    public String contactless(){
+        final GEDI_CL_st_ISO_PollingInfo[] pollingInfo = new GEDI_CL_st_ISO_PollingInfo[1];
+        final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
+        String retorno = "";
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                    final int aux = i;
+                    try {
+
+
+                        pollingInfo[0] = iCl.ISO_Polling(5 * 1000);
+
+                        byte[] abUID = pollingInfo[0].abUID;
+                        String UID = arrayBytesToString(abUID);
+                        System.out.println("iCl.PollingInfo UID: " + UID);
+                        retorno += "1"+"iCl.PollingInfo UID: " + UID;
+
+                        key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
+                        key.abValue = new byte[]{0x0f, 0x1a, 0x2c, 0x33}; //Cartão Gertec
+                        key.abValue = new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF}; // Cartão Cliente
+
+
+                        System.out.println("iCl.MF_BlockREAD: BEGIN");
+                        retorno+="\\ 2"+"iCl.MF_BlockREAD: BEGIN";
+                        key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
+                        byte[] blockInfo = null;
+
+                        for (i = 0; i < 130; i += 4) {
+                            try {
+                                iCl.MF_Authentication(i, key, key.abValue);
+
+
+                                blockInfo = GEDI.getInstance(getApplicationContext()).getCL().MF_BlockRead(i);
+                            } catch (GediException e) {
+                                if (e.toString().contains("252")) {
+                                    System.out.println("iCl.GEDI Exception - Senha Errada!!!! - " + e);
+                                    retorno+="3 +"+"iCl.GEDI Exception - Senha Errada!!!! - " + e;
+                                } else {
+                                    System.out.println("iCl.read error: " + e);
+                                    retorno +="4 "+"iCl.read error: " + e;
+                                }
+                                e.printStackTrace();
+                            }
+                            if (blockInfo != null)
+                                System.out.println("iCl.PollingInfo MF_BlockRead[" + String.format("%03d", i) + "]: " + arrayBytesToString(blockInfo));
+                                retorno+="5 "+"iCl.PollingInfo MF_BlockRead[" + String.format("%03d", i) + "]: " + arrayBytesToString(blockInfo);
+                            blockInfo = null;
+                        }
+                        System.out.println("iCl.MF_BlockREAD: END");
+                        System.out.println("iCl.");
+
+
+                        System.out.println("iCl.WRITE");
+                        retorno +="6 "+"iCl.MF_BlockREAD: END";
+                        iCl.MF_Authentication(112, key, key.abValue);
+                        iCl.MF_BlockWrite(112, hexStringToByteArray("bcde"));
+
+                        iCl.MF_Authentication(116, key, key.abValue);
+                        iCl.MF_BlockWrite(116, hexStringToByteArray("ffddd"));
+
+                        System.out.println("iCl.MF_BlockREAD: BEGIN");
+                        retorno +="7 "+"iCl.MF_BlockREAD: BEGIN";
+                        for (i = 0; i < 130; i += 4) {
+                            try {
+                                iCl.MF_Authentication(i, key, key.abValue);
+                                blockInfo = GEDI.getInstance(getApplicationContext()).getCL().MF_BlockRead(i);
+                            } catch (GediException e) {
+                                if (e.toString().contains("252")) {
+                                    System.out.println("iCl.GEDI Exception - Senha Errada!!!!");
+                                    retorno +="8 Senha errada";
+                                } else {
+                                    System.out.println("iCl.read error: " + e);
+                                    retorno +="9 iCl.read error: " + e;
+                                }
+                                e.printStackTrace();
+                            }
+                            if (blockInfo != null)
+                                System.out.println("iCl.PollingInfo MF_BlockRead[" + String.format("%03d", i) + "]: " + arrayBytesToString(blockInfo));
+                                retorno += "10 iCl.PollingInfo MF_BlockRead[" + String.format("%03d", i) + "]: " + arrayBytesToString(blockInfo);
+                            blockInfo = null;
+                        }
+                        System.out.println("iCl.MF_BlockREAD: END");
+                        System.out.println("iCl.");
+                        System.out.println("iCl.END");
+                        return;
+
+                    } catch (Exception e) {
+                        System.out.println("iCl.ISO_Polling- FAIL - " + e.getMessage());
+                        
+                    }
+            }
+
+        }).start();
+        return retorno;
+
+    }
 
     //Metodos ISmart
     public String checkISmart(){
