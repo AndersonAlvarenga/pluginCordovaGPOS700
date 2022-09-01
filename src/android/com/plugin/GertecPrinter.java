@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 
 import android.app.ProgressDialog;
+import android.os.Handler;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -57,7 +58,8 @@ public class GertecPrinter {
     //Variaveis Led
     private ILED iLed;
     private ICL iCl;
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog;  
+    private Handler handler = new Handler();
 
     //Variaveis Pagamento
     private ISMART iSmart;
