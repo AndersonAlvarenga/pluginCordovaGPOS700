@@ -45,4 +45,7 @@ exports.onIcl = function (success, error) {
 exports.offIcl = function (success, error) {
     exec(success, error, 'MainActivity', 'offIcl');
 };
+exports.contactless = function (success, error) {
+    exec(success, error, 'MainActivity', 'contactless');
+};
 
