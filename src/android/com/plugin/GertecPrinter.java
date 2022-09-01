@@ -564,7 +564,6 @@ public class GertecPrinter {
             @Override
             public void run() {
 
-                    final int aux = i;
                     try {
 
 
