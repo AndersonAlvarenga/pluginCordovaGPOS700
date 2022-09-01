@@ -42,4 +42,7 @@ exports.checkISmart = function (success, error) {
 exports.onIcl = function (success, error) {
     exec(success, error, 'MainActivity', 'onIcl');
 };
+exports.offIcl = function (success, error) {
+    exec(success, error, 'MainActivity', 'offIcl');
+};
 

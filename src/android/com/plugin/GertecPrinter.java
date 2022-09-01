@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
-
+import android.app.ProgressDialog;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -31,6 +31,8 @@ import br.com.gertec.gedi.enums.GEDI_LED_e_Id;
 import br.com.gertec.gedi.interfaces.ISMART;
 import br.com.gertec.gedi.enums.GEDI_SMART_e_Slot;
 import br.com.gertec.gedi.enums.GEDI_SMART_e_Status;
+import br.com.gertec.gedi.structs.GEDI_CL_st_ISO_PollingInfo;
+import br.com.gertec.gedi.structs.GEDI_CL_st_MF_Key;
 
 public class GertecPrinter {
   // Definições
@@ -55,6 +57,7 @@ public class GertecPrinter {
     //Variaveis Led
     private ILED iLed;
     private ICL iCl;
+    ProgressDialog progressDialog;
 
     //Variaveis Pagamento
     private ISMART iSmart;
@@ -515,16 +518,55 @@ public class GertecPrinter {
 
     //MetodosTesting
 
-
+    //Ativado ICL
     public String onICl(){
         try {
             iCl = GEDI.getInstance().getCL();
-
+            
         } catch (Exception e) {
             return "getCL - FAIL - " + e.getMessage();
         }
+
+        try {
+            iCl.PowerOn();  
+        } catch (Exception e) {
+            return "iCl.PowerOn - FAIL - " + e.getMessage();
+        }
+        progressDialog.setTitle("ICL");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.show();
+                    }
+                });
+            }
+        }).run();
+
+
         return "Ativado";
     }
+
+    public String offICl(){
+        try {
+            iCl = GEDI.getInstance().getCL();
+            
+        } catch (Exception e) {
+            return "getCL - FAIL - " + e.getMessage();
+        }
+
+        try {
+            iCl.PowerOff();  
+        } catch (Exception e) {
+            return "iCl.PowerOff - FAIL - " + e.getMessage();
+        }
+
+        return "Desativado";
+    }
+
+    
 
     //Metodos ISmart
     public String checkISmart(){
