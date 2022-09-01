@@ -585,7 +585,7 @@ public class GertecPrinter {
                         key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
                         byte[] blockInfo = null;
 
-                        for (i = 0; i < 130; i += 4) {
+                        for (int i = 0; i < 130; i += 4) {
                             try {
                                 iCl.MF_Authentication(i, key, key.abValue);
 
