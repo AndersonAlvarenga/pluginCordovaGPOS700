@@ -620,7 +620,7 @@ public class GertecPrinter {
 
                         System.out.println("iCl.MF_BlockREAD: BEGIN");
                         retorno +="7 "+"iCl.MF_BlockREAD: BEGIN";
-                        for (i = 0; i < 130; i += 4) {
+                        for (int i = 0; i < 130; i += 4) {
                             try {
                                 iCl.MF_Authentication(i, key, key.abValue);
                                 blockInfo = GEDI.getInstance().getCL().MF_BlockRead(i);
