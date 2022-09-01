@@ -569,7 +569,7 @@ public class GertecPrinter {
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
         new Thread(new Runnable() {
             @Override
-            public run() {
+            public void run() {
 
                     try {
 
