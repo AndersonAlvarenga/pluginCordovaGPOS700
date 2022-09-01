@@ -62,7 +62,6 @@ public class MainActivity extends CordovaPlugin {
         super.initialize(cordova, webView);
         this.webView = webView;
         gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
-        gertecPrinter.setConfigImpressao(configPrint);
     }
 
     public MainActivity() {
@@ -80,6 +79,21 @@ public class MainActivity extends CordovaPlugin {
                 public void run() {
                     try {
                         status = gertecPrinter.getStatusImpressora();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("onIcl")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = gertecPrinter.onICl();
                         Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {

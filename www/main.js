@@ -39,4 +39,7 @@ exports.setSmartCardPowerOff = function (success, error) {
 exports.checkISmart = function (success, error) {
     exec(success, error, 'MainActivity', 'checkISmart');
 };
+exports.onIcl = function (success, error) {
+    exec(success, error, 'MainActivity', 'onIcl');
+};
 

@@ -514,6 +514,19 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
+
+
+    public String onICl(){
+        try {
+            iCl = GEDI.getInstance(getApplicationContext()).getCL();
+
+        } catch (Exception e) {
+            return "getCL - FAIL - " + e.getMessage();
+        }
+        return "Ativado";
+    }
+
+    //Metodos ISmart
     public String checkISmart(){
         
         sb = new StringBuilder();
@@ -558,9 +571,6 @@ public class GertecPrinter {
         
         return "Ativado";
     }
-
-    
-
 
 
 
