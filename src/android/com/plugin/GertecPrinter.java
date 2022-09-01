@@ -76,6 +76,7 @@ public class GertecPrinter {
     **/
     public GertecPrinter(Context c) {
         this.context = c;
+        
         startIGEDI();
     }
 
@@ -534,6 +535,7 @@ public class GertecPrinter {
         } catch (Exception e) {
             return "iCl.PowerOn - FAIL - " + e.getMessage();
         }
+        progressDialog = new ProgressDialog(MainActivity.this)
         progressDialog.setTitle("ICL");
         new Thread(new Runnable() {
             @Override
