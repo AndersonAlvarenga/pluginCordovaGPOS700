@@ -570,14 +570,18 @@ public class GertecPrinter {
         String UID;
         try {
             pollingInfo[0] = iCl.ISO_Polling(5 * 1000);
-            byte[] abUID = pollingInfo[0].abUID;
-            UID = arrayBytesToString(abUID);
         } catch (Exception e) {
             // TODO: handle exception
             return e.getMessage();
         }
-
-        return UID;
+        byte[] abUID = pollingInfo[0].abUID;
+        UID = arrayBytesToString(abUID);
+        key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
+        key.abValue = new byte[]{0x0f, 0x1a, 0x2c, 0x33}; //Cartão Gertec
+        key.abValue = new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF}; // Cartão Cliente
+        key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
+        byte[] blockInfo = null;
+        return pollingInfo[0].toString();
     }
 
 
