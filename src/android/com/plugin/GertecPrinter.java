@@ -572,7 +572,7 @@ public class GertecPrinter {
                         byte[] abUID = pollingInfo[0].abUID;
                         String UID = arrayBytesToString(abUID);
                         System.out.println("iCl.PollingInfo UID: " + UID);
-                
+                        Toast.makeText(cordova.getActivity(), "iCl.PollingInfo UID: " + UID, Toast.LENGTH_LONG).show();
 
                         key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
                         key.abValue = new byte[]{0x0f, 0x1a, 0x2c, 0x33}; //Cartão Gertec
