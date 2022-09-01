@@ -518,7 +518,7 @@ public class GertecPrinter {
 
     public String onICl(){
         try {
-            iCl = GEDI.getInstance(getApplicationContext()).getCL();
+            iCl = GEDI.getInstance().getCL();
 
         } catch (Exception e) {
             return "getCL - FAIL - " + e.getMessage();
