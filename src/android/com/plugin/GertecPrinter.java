@@ -654,6 +654,16 @@ public class GertecPrinter {
 
     }
 
+
+    public static String arrayBytesToString(byte[] bValues) {
+
+        StringBuilder sbValues = new StringBuilder();
+        for (byte b : bValues) {
+            sbValues.append(String.format("%02X ", b).replace(" ", ""));
+        }
+        return sbValues.toString();
+    }
+
     //Metodos ISmart
     public String checkISmart(){
         
