@@ -155,8 +155,13 @@ public class NFCGedi extends Activity {
     return "OK";
     }
     public String lerCartao(){
-        pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
-        pollingInfo = icl.ISO_Polling(5000);
+        try{
+            pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
+            pollingInfo = icl.ISO_Polling(5000);
+        }catch (Exception e ){
+            return e.getMessage();
+        }
+
         return LerCard();
     }
 }
