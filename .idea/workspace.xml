@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aeec4bf-f21c-418a-a722-b581b0e3d37a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,23 +62,35 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
-          <line>110</line>
-          <properties class="com.plugin.NFCGedi" method="bytesToHex">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="19" />
+          <line>48</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
           <line>85</line>
-          <option name="timeStamp" value="27" />
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="28" />
+          <line>78</line>
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

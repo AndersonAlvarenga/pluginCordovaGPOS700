@@ -52,6 +52,7 @@ public class MainActivity extends CordovaPlugin {
     private CallbackContext callbackContext;
     private CallbackContext scancallbackContext;
     private GertecPrinter gertecPrinter;
+    private NFCGedi nfcGedi;
     private CordovaWebView webView;
     private ConfigPrint configPrint = new ConfigPrint();
     private Intent intent;
@@ -142,7 +143,18 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
         if (action.equals("contactless")) {
-           
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = nfcGedi.LerCard();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
 
             return true;
         }
