@@ -107,7 +107,7 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
         if (action.equals("offIcl")) {
-            
+
             
             return true;
         }
@@ -142,18 +142,7 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
         if (action.equals("contactless")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = gertecPrinter.contactless();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
+           
 
             return true;
         }
