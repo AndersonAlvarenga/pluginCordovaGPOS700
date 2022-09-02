@@ -152,7 +152,7 @@ public class NFCGedi extends Activity {
         }catch (Exception e ){
             return e.getMessage();
         }
-
+    return "OK";
     }
     public String lerCartao(){
         pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
