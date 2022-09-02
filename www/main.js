@@ -39,13 +39,13 @@ exports.setSmartCardPowerOff = function (success, error) {
 exports.checkISmart = function (success, error) {
     exec(success, error, 'MainActivity', 'checkISmart');
 };
-exports.onIcl = function (success, error) {
-    exec(success, error, 'MainActivity', 'onIcl');
+exports.onICL = function (success, error) {
+    exec(success, error, 'MainActivity', 'onICL');
 };
-exports.offIcl = function (success, error) {
-    exec(success, error, 'MainActivity', 'offIcl');
+exports.offICL = function (success, error) {
+    exec(success, error, 'MainActivity', 'offICL');
 };
-exports.contactless = function (success, error) {
-    exec(success, error, 'MainActivity', 'contactless');
+exports.lerCartao = function (success, error) {
+    exec(success, error, 'MainActivity', 'lerCartao');
 };
 

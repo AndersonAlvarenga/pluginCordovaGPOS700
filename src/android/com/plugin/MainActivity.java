@@ -91,29 +91,7 @@ public class MainActivity extends CordovaPlugin {
             });
             return true;
         }
-        if (action.equals("onIcl")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    intent = null;
-                    try {
-                        intent = new Intent(context, NFCGedi.class);
-                        cordova.getActivity().startActivity(intent);
-                        nfcGedi.onNewIntent(intent);
-                        nfcGedi.finish();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            
-            return true;
-        }
-        if (action.equals("offIcl")) {
 
-            
-            return true;
-        }
         if (action.equals("led")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
@@ -365,6 +343,55 @@ public class MainActivity extends CordovaPlugin {
             return true;
 
         }
+
+        //Chamadas Contactell
+
+        if (action.equals("onICL")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = nfcGedi.onICL();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("lerCartao")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = nfcGedi.lerCartao();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("offICL")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = nfcGedi.offICL();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+
         return false; // Returning false results in a "MethodNotFound" error.
     }
 

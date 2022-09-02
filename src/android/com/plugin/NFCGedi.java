@@ -135,4 +135,28 @@ public class NFCGedi extends Activity {
     private void closeIntent(){
         finish();
     }
+
+    public String onICL(){
+        try {
+            nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+            icl = GEDI.getInstance().getCL();
+            icl.PowerOn();
+        }catch (Exception e){
+            return e.getMessage();
+        }
+        return "OK";
+    }
+    public String offICL(){
+        try {
+            icl.PowerOff();
+        }catch (Exception e ){
+            return e.getMessage();
+        }
+
+    }
+    public String lerCartao(){
+        pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
+        pollingInfo = icl.ISO_Polling(5000);
+        return LerCard();
+    }
 }
