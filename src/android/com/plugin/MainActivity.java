@@ -327,63 +327,16 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
-        if(action.equals("teste")){
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = gertecPrinter.getStatusImpressora();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-
-        }
 
         //Chamadas Contactell
 
         if (action.equals("onICL")) {
-            nfcGedi = new NFCGedi(cordova.getActivity().getApplicationContext());
-            cordova.getActivity().runOnUiThread(new Runnable() {
+            cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
+                    intent = null;
                     try {
-                        status = nfcGedi.onICL();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("lerCartao")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = nfcGedi.lerCartao();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("offICL")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = nfcGedi.offICL();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
+                        intent = new Intent(context, NFCGedi.class);
+                        cordova.getActivity().startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
