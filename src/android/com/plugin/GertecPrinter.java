@@ -683,6 +683,7 @@ public class GertecPrinter {
         key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
         byte[] blockInfo = null;
         return pollingInfo[0].peType.toString();*/
+        return "ok";
     }
 
 
