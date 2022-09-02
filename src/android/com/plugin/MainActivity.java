@@ -63,6 +63,7 @@ public class MainActivity extends CordovaPlugin {
         super.initialize(cordova, webView);
         this.webView = webView;
         gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
+        nfcGedi = new NFCGedi(cordova.getActivity().getApplicationContext());
     }
 
     public MainActivity() {
