@@ -565,7 +565,7 @@ public class GertecPrinter {
     }
 
     public String contactless(){
-        GEDI_CL_st_ISO_PollingInfo[] pollingInfo = new GEDI_CL_st_ISO_PollingInfo[0];
+        final GEDI_CL_st_ISO_PollingInfo[] pollingInfo = new GEDI_CL_st_ISO_PollingInfo[1];
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
         String UID;
         try {
