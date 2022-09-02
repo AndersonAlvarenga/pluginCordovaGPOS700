@@ -53,7 +53,15 @@ public class NFCGedi extends Activity {
             icl.PowerOn();
             pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
             // Tempo que será aguardado para fazer a leitura
-            pollingInfo = icl.ISO_Polling(100);
+            for(int x = 0; x<3;x++){
+                try{
+                    pollingInfo = icl.ISO_Polling(5000);
+                    break;
+                }catch (Exception e){
+
+                }
+            }
+
             icl.PowerOff();
             LerCard();
         } catch (Exception e) {
