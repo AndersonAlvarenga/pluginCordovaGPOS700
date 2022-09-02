@@ -79,7 +79,6 @@ public class NFCGedi extends Activity {
         if(nfcAdapter!= null)
             nfcAdapter.enableForegroundDispatch(this, pendingIntent, nfcIntentFilter, null);
 
-        LerCard();
     }
 
     public String LerCard(){
