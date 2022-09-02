@@ -93,10 +93,10 @@ public class MainActivity extends CordovaPlugin {
         if (action.equals("onIcl")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
+                    intent = null;
                     try {
-                        status = gertecPrinter.onICl();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
+                        intent = new Intent(context, NFCGedi.class);
+                        cordova.getActivity().startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
@@ -165,10 +165,10 @@ public class MainActivity extends CordovaPlugin {
                     }
                 }
             });
-            
+
             return true;
         }
-        
+
         if (action.equals("setSmartCardPowerOff")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
