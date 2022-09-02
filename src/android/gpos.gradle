@@ -27,5 +27,7 @@ dependencies {
     
     implementation(name: 'android-easy-layer-debug', ext: 'aar')
     implementation(name: 'libgedi-1.16.8-gpos700-payment-release', ext: 'aar')
+    implementation(name: 'SatGerLib', ext: 'aar')
+
 
 }

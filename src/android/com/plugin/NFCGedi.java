@@ -67,7 +67,6 @@ public class NFCGedi extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        finish();
     }
 
     @Override
@@ -125,5 +124,8 @@ public class NFCGedi extends Activity {
             sb.append(String.format("%02x", b));
         }
         return sb.toString();
+    }
+    private void closeIntent(){
+        finish();
     }
 }
