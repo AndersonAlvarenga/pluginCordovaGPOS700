@@ -84,12 +84,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
-          <line>85</line>
+          <line>86</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
-          <line>83</line>
+          <line>84</line>
           <properties class="com.plugin.NFCGedi" method="LerCard" />
           <option name="timeStamp" value="68" />
         </line-breakpoint>

@@ -73,12 +73,13 @@ public class NFCGedi extends Activity {
         IntentFilter idDetected = new IntentFilter((NfcAdapter.EXTRA_ID));
 
         IntentFilter[] nfcIntentFilter = new IntentFilter[]{techDetected,tagDetected,ndefDetected, idDetected};
-
+        Intent newIntent = new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(
-                this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+                this, 0,newIntent , 0);
         if(nfcAdapter!= null)
             nfcAdapter.enableForegroundDispatch(this, pendingIntent, nfcIntentFilter, null);
 
+        onNewIntent(newIntent);
     }
 
     public String LerCard(){
