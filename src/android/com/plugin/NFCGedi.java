@@ -50,20 +50,28 @@ public class NFCGedi extends Activity {
         try {
             icl = GEDI.getInstance().getCL();
             // Inicializa a Leitura da NFC segura
+            boolean isConect = false;
             icl.PowerOn();
             pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
             // Tempo que será aguardado para fazer a leitura
+
+
             for(int x = 0; x<3;x++){
+                text.setText("Insira o Cartão.\nTentativa"+(x+1)+" de 3.");
                 try{
                     pollingInfo = icl.ISO_Polling(5000);
+                    isConect = true;
                     break;
                 }catch (Exception e){
-
+                    text.setText("Insira o Cartão.\nTentativa 1 de 3.");
                 }
             }
 
             icl.PowerOff();
-            LerCard();
+            if(isConect){
+                LerCard();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,7 +95,6 @@ public class NFCGedi extends Activity {
         if(nfcAdapter!= null)
             nfcAdapter.enableForegroundDispatch(this, pendingIntent, nfcIntentFilter, null);
 
-        onNewIntent(newIntent);
     }
 
     public String LerCard(){
