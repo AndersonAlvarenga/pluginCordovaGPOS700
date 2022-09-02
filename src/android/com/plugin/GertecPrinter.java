@@ -544,15 +544,7 @@ public class GertecPrinter {
 
     //Ativado ICL
     public String onICl(){
-        nfcGedi = new NFCGedi();
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this.context);
-        iCl = GEDI.getInstance().getCL();
-        iCl.PowerOn();
-        pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
-        // Tempo que será aguardado para fazer a leitura
-        pollingInfo = icl.ISO_Polling(100);
-        icl.PowerOff();
-        String lerCard = nfcGedi.LerCard();
+        
 
     }
 
