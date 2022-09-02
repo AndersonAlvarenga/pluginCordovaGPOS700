@@ -6,6 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.IsoDep;
+import android.nfc.tech.MifareClassic;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.app.ProgressDialog;
@@ -20,7 +26,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
-
+import com.plugin.NFCGedi;
 
 import br.com.gertec.gedi.GEDI;
 import br.com.gertec.gedi.enums.GEDI_PRNTR_e_Alignment;
@@ -65,10 +71,17 @@ public class GertecPrinter {
 
     //Variaveis Led
     private ILED iLed;
-    private ICL iCl;
-    ProgressDialog progressDialog;  
-    private Handler handler = new Handler();
 
+    //Variaveis Contactless
+
+    ICL icl = null;
+
+    GEDI_CL_st_ISO_PollingInfo pollingInfo;
+
+    private NfcAdapter nfcAdapter;
+
+    private TextView text;
+    private NFCGedi nfcGedi;
     //Variaveis Pagamento
     private ISMART iSmart;
     private StringBuilder sb;
@@ -531,178 +544,16 @@ public class GertecPrinter {
 
     //Ativado ICL
     public String onICl(){
-        try {
-            iCl = GEDI.getInstance().getCL();
-            
-        } catch (Exception e) {
-            return "getCL - FAIL - " + e.getMessage();
-        }
+        nfcGedi = new NFCGedi();
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this.context);
+        iCl = GEDI.getInstance().getCL();
+        iCl.PowerOn();
+        pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
+        // Tempo que será aguardado para fazer a leitura
+        pollingInfo = icl.ISO_Polling(100);
+        icl.PowerOff();
+        String lerCard = nfcGedi.LerCard();
 
-        try {
-            iCl.PowerOn();  
-        } catch (Exception e) {
-            return "iCl.PowerOn - FAIL - " + e.getMessage();
-        }
-
-        return "Ativado";
-    }
-
-    public String offICl(){
-        try {
-            iCl = GEDI.getInstance().getCL();
-            
-        } catch (Exception e) {
-            return "getCL - FAIL - " + e.getMessage();
-        }
-
-        try {
-            iCl.PowerOff();  
-        } catch (Exception e) {
-            return "iCl.PowerOff - FAIL - " + e.getMessage();
-        }
-
-        return "Desativado";
-    }
-
-    public String contactless(){
-        final GEDI_CL_st_ISO_PollingInfo[] pollingInfo = new GEDI_CL_st_ISO_PollingInfo[1];
-        final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
-
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                for (int i = 1; i <= 3; i++) {
-
-                    final int aux = i;
-                    try {
-
-
-                        pollingInfo[0] = iCl.ISO_Polling(5 * 1000);
-
-                        System.out.println("iCl.ISO_Polling\t\t\t- OK");
-                        System.out.printf("iCl.ISO_Polling - peType: %s\n", pollingInfo[0].peType);
-                        
-
-                        byte[] abUID = pollingInfo[0].abUID;
-
-                        String UID = arrayBytesToString(abUID);
-                        System.out.println("iCl.PollingInfo UID: " + UID);
-
-                        key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
-                        key.abValue = new byte[]{0x0f, 0x1a, 0x2c, 0x33}; //Cartão Gertec
-                        key.abValue = new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF}; // Cartão Cliente
-
-
-                        System.out.println("iCl.MF_BlockREAD: BEGIN");
-
-                        key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
-                        byte[] blockInfo = null;
-
-                        for (i = 0; i < 130; i += 4) {
-                            try {
-                                iCl.MF_Authentication(i, key, key.abValue);
-
-
-                                blockInfo = GEDI.getInstance().getCL().MF_BlockRead(i);
-                            } catch (GediException e) {
-                                if (e.toString().contains("252")) {
-                                    System.out.println("iCl.GEDI Exception - Senha Errada!!!! - " + e);
-
-                                } else {
-                                    System.out.println("iCl.read error: " + e);
-                                }
-                                e.printStackTrace();
-                            }
-                            if (blockInfo != null)
-                                System.out.println("iCl.PollingInfo MF_BlockRead[" + String.format("%03d", i) + "]: " + arrayBytesToString(blockInfo));
-                            blockInfo = null;
-                        }
-                        System.out.println("iCl.MF_BlockREAD: END");
-                        System.out.println("iCl.");
-
-
-                        System.out.println("iCl.WRITE");
-                        iCl.MF_Authentication(112, key, key.abValue);
-                        iCl.MF_BlockWrite(112, hexStringToByteArray("bcde"));
-
-                        iCl.MF_Authentication(116, key, key.abValue);
-                        iCl.MF_BlockWrite(116, hexStringToByteArray("ffddd"));
-
-                        System.out.println("iCl.MF_BlockREAD: BEGIN");
-                        for (i = 0; i < 130; i += 4) {
-                            try {
-                                iCl.MF_Authentication(i, key, key.abValue);
-                                blockInfo = GEDI.getInstance().getCL().MF_BlockRead(i);
-                            } catch (GediException e) {
-                                if (e.toString().contains("252")) {
-                                    System.out.println("iCl.GEDI Exception - Senha Errada!!!!");
-
-                                } else {
-                                    System.out.println("iCl.read error: " + e);
-                                }
-                                e.printStackTrace();
-                            }
-                            if (blockInfo != null)
-                                System.out.println("iCl.PollingInfo MF_BlockRead[" + String.format("%03d", i) + "]: " + arrayBytesToString(blockInfo));
-                            blockInfo = null;
-                        }
-                        System.out.println("iCl.MF_BlockREAD: END");
-                        System.out.println("iCl.");
-                        System.out.println("iCl.END");
-
-                        return;
-
-                    } catch (GediException gedi_e_ret) {
-                        System.out.println("iCl.ISO_Polling\t\t\t- FAIL (GEDI) - " + gedi_e_ret.getErrorCode().name());
-                        
-
-                    } catch (Exception e) {
-                        System.out.println("iCl.ISO_Polling\t\t\t- FAIL - " + e.getMessage());
-                        
-
-                    }
-                }
-                
-            }
-
-        }).start();
-        /*String UID;
-        try {
-            pollingInfo[0] = iCl.ISO_Polling(5 * 1000);
-        } catch (Exception e) {
-            // TODO: handle exception
-            return e.getMessage();
-        }
-        byte[] abUID = pollingInfo[0].abUID;
-        UID = arrayBytesToString(abUID);
-        key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
-        key.abValue = new byte[]{0x0f, 0x1a, 0x2c, 0x33}; //Cartão Gertec
-        key.abValue = new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF}; // Cartão Cliente
-        key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
-        byte[] blockInfo = null;
-        return pollingInfo[0].peType.toString();*/
-        return "ok";
-    }
-
-
-    public static String arrayBytesToString(byte[] bValues) {
-
-        StringBuilder sbValues = new StringBuilder();
-        for (byte b : bValues) {
-            sbValues.append(String.format("%02X ", b).replace(" ", ""));
-        }
-        return sbValues.toString();
-    }
-
-    public static byte[] hexStringToByteArray(String s) {
-        int len = s.length();
-        byte[] data = new byte[len / 2];
-        for (int i = 0; i < len; i += 2) {
-            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i + 1), 16));
-        }
-        return data;
     }
 
 
