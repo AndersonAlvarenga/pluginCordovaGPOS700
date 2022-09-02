@@ -347,7 +347,7 @@ public class MainActivity extends CordovaPlugin {
         //Chamadas Contactell
 
         if (action.equals("onICL")) {
-            nfcGedi = new NFCGedi();
+            nfcGedi = new NFCGedi(cordova.getActivity().getApplicationContext());
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     try {

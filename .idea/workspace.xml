@@ -69,11 +69,6 @@
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/android/com/plugin/MainActivity.java</url>
-          <line>145</line>
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
           <line>91</line>
           <option name="timeStamp" value="86" />
@@ -92,6 +87,11 @@
           <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
           <line>157</line>
           <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/MainActivity.java</url>
+          <line>353</line>
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
