@@ -98,6 +98,7 @@ public class MainActivity extends CordovaPlugin {
                     try {
                         intent = new Intent(context, NFCGedi.class);
                         cordova.getActivity().startActivity(intent);
+                        cordova.getActivity().stopActivity();
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());

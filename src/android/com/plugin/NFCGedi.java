@@ -59,6 +59,7 @@ public class NFCGedi extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        finish();
     }
 
     @Override
