@@ -63,7 +63,6 @@ public class MainActivity extends CordovaPlugin {
         super.initialize(cordova, webView);
         this.webView = webView;
         gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
-        nfcGedi = new NFCGedi(cordova.getActivity().getApplicationContext());
     }
 
     public MainActivity() {
@@ -348,6 +347,7 @@ public class MainActivity extends CordovaPlugin {
         //Chamadas Contactell
 
         if (action.equals("onICL")) {
+            nfcGedi = new NFCGedi();
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     try {
