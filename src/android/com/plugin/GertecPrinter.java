@@ -565,7 +565,7 @@ public class GertecPrinter {
     }
 
     public String contactless(){
-        final GEDI_CL_st_ISO_PollingInfo pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
+        GEDI_CL_st_ISO_PollingInfo pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
         String UID;
         try {
@@ -581,7 +581,7 @@ public class GertecPrinter {
         key.abValue = new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF}; // Cartão Cliente
         key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
         byte[] blockInfo = null;*/
-        return pollingInfo[0].peType.toString();
+        return pollingInfo.peType.toString();
     }
 
 
