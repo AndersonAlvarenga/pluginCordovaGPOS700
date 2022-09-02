@@ -544,8 +544,8 @@ public class GertecPrinter {
 
     //Ativado ICL
     public String onICl(){
-        
 
+return "ok";
     }
 
 
