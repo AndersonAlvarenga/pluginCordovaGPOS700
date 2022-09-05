@@ -58,14 +58,15 @@ public class NFCId extends Activity {
         IntentFilter techDetected = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
         IntentFilter idDetected = new IntentFilter((NfcAdapter.EXTRA_ID));
         IntentFilter[] nfcIntentFilter = new IntentFilter[]{techDetected,tagDetected,ndefDetected, idDetected};
-
+        Intent intent = new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         PendingIntent pendingIntent = PendingIntent.getActivity(
-                this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+                this, 0, intent , 0);
 
         // Deixa o sensor da NFC em alerta.
         if(nfcAdapter!= null)
             nfcAdapter.enableForegroundDispatch(this, pendingIntent, nfcIntentFilter, null);
 
+        onNewIntent(intent);
     }
 
     /*
