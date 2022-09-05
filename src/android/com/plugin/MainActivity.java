@@ -313,7 +313,7 @@ public class MainActivity extends CordovaPlugin {
 
         //Chamadas Contactell
 
-        if (action.equals("onICl")) {
+        if (action.equals("onICL")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     try {
