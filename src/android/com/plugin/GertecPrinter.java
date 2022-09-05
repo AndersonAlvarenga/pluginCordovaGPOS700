@@ -595,7 +595,9 @@ public class GertecPrinter {
         String UID;
         try {
             pollingInfo= icl.ISO_Polling(10000);
-        } catch (Exception e) {
+        }catch (GediException e ){
+            return e.getMessage();
+        }catch (Exception e) {
             // TODO: handle exception
             return e.getMessage();
         }
