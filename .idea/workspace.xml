@@ -64,7 +64,7 @@
       <breakpoints>
         <line-breakpoint suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
-          <line>763</line>
+          <line>756</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="java-line">
@@ -96,14 +96,6 @@
           <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
           <line>596</line>
           <option name="timeStamp" value="110" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
-          <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
-          <line>602</line>
-          <properties method="run">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="111" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -598,22 +598,15 @@ public class GertecPrinter {
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
         String erro="";
         String UID;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    pollingInfo= icl.ISO_Polling(10000);
+        try {
+            pollingInfo= icl.ISO_Polling(10000);
 
-                }catch (GediException e ){
-
-                }catch (Exception e) {
-                    // TODO: handle exception
-
-                }
-
-            }
-        }).start();
-
+        }catch (GediException e ){
+            return e.getMessage();
+        }catch (Exception e) {
+            // TODO: handle exception
+            return e.getMessage();
+        }
         byte[] abUID = pollingInfo.abUID;
         UID = arrayBytesToString(abUID);
         /*key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
