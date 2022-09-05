@@ -48,6 +48,7 @@ import br.com.gertec.gedi.enums.GEDI_SMART_e_Status;
 import br.com.gertec.gedi.structs.GEDI_CL_st_ISO_PollingInfo;
 import br.com.gertec.gedi.structs.GEDI_CL_st_MF_Key;
 import br.com.gertec.gedi.enums.GEDI_CL_e_MF_KeyType;
+import br.com.gertec.easylayer.contactless.ContactLessCard;
 
 public class GertecPrinter {
   // Definições
@@ -541,7 +542,13 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
-    //Inicio Métodos Pagamento StarGerLib
+    //Inicio Métodos Contactless EasyLayer
+
+    public String teste(){
+        Contactless contacLayer = Contactless.ContactLessCard();
+        contacLayer.connect(10000);
+        return "ok";
+    }
 
 
     //Fim metodos
