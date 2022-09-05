@@ -51,3 +51,8 @@ exports.lerCartao = function (success, error) {
 exports.ativarLeituraICL = function (success, error) {
     exec(success, error, 'MainActivity', 'ativarLeituraICL');
 };
+exports.leitorNfcId = function (success, error) {
+    exec(success, error, 'MainActivity', 'leitorNfcId');
+};
+
+

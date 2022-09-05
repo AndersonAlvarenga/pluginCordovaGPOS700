@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aeec4bf-f21c-418a-a722-b581b0e3d37a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,9 +95,49 @@
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
-          <line>596</line>
-          <option name="timeStamp" value="110" />
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="115" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="119" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
+          <line>128</line>
+          <option name="timeStamp" value="120" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

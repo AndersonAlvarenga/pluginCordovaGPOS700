@@ -377,6 +377,21 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
+        if (action.equals("leitorNfcId")) {
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    intent = null;
+                    try {
+                        intent = new Intent(context, NFCId.class);
+                        cordova.getActivity().startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
         return false; // Returning false results in a "MethodNotFound" error.
     }
 
