@@ -545,14 +545,14 @@ public class GertecPrinter {
     //Inicio Metodos Contactless
     public String onICl(){
         try {
-            iCl = GEDI.getInstance().getCL();
+            icl = GEDI.getInstance().getCL();
 
         } catch (Exception e) {
             return "getCL - FAIL - " + e.getMessage();
         }
 
         try {
-            iCl.PowerOn();
+            icl.PowerOn();
         } catch (Exception e) {
             return "iCl.PowerOn - FAIL - " + e.getMessage();
         }
@@ -562,14 +562,14 @@ public class GertecPrinter {
 
     public String offICl(){
         try {
-            iCl = GEDI.getInstance().getCL();
+            icl = GEDI.getInstance().getCL();
 
         } catch (Exception e) {
             return "getCL - FAIL - " + e.getMessage();
         }
 
         try {
-            iCl.PowerOff();
+            icl.PowerOff();
         } catch (Exception e) {
             return "iCl.PowerOff - FAIL - " + e.getMessage();
         }
@@ -582,7 +582,7 @@ public class GertecPrinter {
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
         String UID;
         try {
-            pollingInfo[0] = iCl.ISO_Polling(5 * 1000);
+            pollingInfo[0] = icl.ISO_Polling(5 * 1000);
         } catch (Exception e) {
             // TODO: handle exception
             return e.getMessage();
