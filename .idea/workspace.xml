@@ -7,8 +7,6 @@
     <list default="true" id="6aeec4bf-f21c-418a-a722-b581b0e3d37a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +87,21 @@
           <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java</url>
           <line>157</line>
           <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
+          <line>591</line>
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
+          <line>592</line>
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
+          <line>546</line>
+          <option name="timeStamp" value="109" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
