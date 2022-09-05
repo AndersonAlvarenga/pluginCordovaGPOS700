@@ -545,7 +545,7 @@ public class GertecPrinter {
     //Inicio Métodos Contactless EasyLayer
 
     public String teste(){
-        Contactless contacLayer = Contactless.ContactLessCard();
+        ContactLessCard contacLayer = ContactLessCard.ContactLessCard();
         contacLayer.connect(10000);
         return "ok";
     }
