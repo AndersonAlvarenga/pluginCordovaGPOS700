@@ -48,4 +48,6 @@ exports.offICL = function (success, error) {
 exports.lerCartao = function (success, error) {
     exec(success, error, 'MainActivity', 'lerCartao');
 };
-
+exports.ativarLeituraICL = function (success, error) {
+    exec(success, error, 'MainActivity', 'ativarLeituraICL');
+};

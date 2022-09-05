@@ -74,7 +74,7 @@ public class GertecPrinter {
 
     //Variaveis Contactless
 
-    ICL icl = null;
+    ICL icl;
 
     GEDI_CL_st_ISO_PollingInfo pollingInfo;
 
@@ -543,9 +543,20 @@ public class GertecPrinter {
     //MetodosTesting
 
     //Inicio Metodos Contactless
+    public String ativarLeituraICL(){
+        String retornoOnICl = onICl();
+        if(retornoOnICl != "Ativado"){
+            return retornoOnICl;
+        }
+        String retornoLerCartao = lerCartao();
+        offICl();
+        return retornoLerCartao;
+    }
+
     public String onICl(){
         try {
             icl = GEDI.getInstance().getCL();
+            nfcAdapter = NfcAdapter.getDefaultAdapter(this.context);
 
         } catch (Exception e) {
             return "getCL - FAIL - " + e.getMessage();
@@ -580,9 +591,10 @@ public class GertecPrinter {
     public String lerCartao(){
         final GEDI_CL_st_ISO_PollingInfo[] pollingInfo = new GEDI_CL_st_ISO_PollingInfo[1];
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
+
         String UID;
         try {
-            pollingInfo[0] = icl.ISO_Polling(5 * 1000);
+            pollingInfo[0] = icl.ISO_Polling(10000);
         } catch (Exception e) {
             // TODO: handle exception
             return e.getMessage();
