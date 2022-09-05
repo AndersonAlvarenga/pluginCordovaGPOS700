@@ -589,17 +589,17 @@ public class GertecPrinter {
     }
 
     public String lerCartao(){
-        final GEDI_CL_st_ISO_PollingInfo[] pollingInfo = new GEDI_CL_st_ISO_PollingInfo[1];
+        pollingInfo = new GEDI_CL_st_ISO_PollingInfo();
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
 
         String UID;
         try {
-            pollingInfo[0] = icl.ISO_Polling(10000);
+            pollingInfo= icl.ISO_Polling(10000);
         } catch (Exception e) {
             // TODO: handle exception
             return e.getMessage();
         }
-        byte[] abUID = pollingInfo[0].abUID;
+        byte[] abUID = pollingInfo.abUID;
         UID = arrayBytesToString(abUID);
         /*key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
         key.abValue = new byte[]{0x0f, 0x1a, 0x2c, 0x33}; //Cartão Gertec
