@@ -63,8 +63,7 @@ public class NFCId extends Activity {
                 this, 0, intent , 0);
 
         // Deixa o sensor da NFC em alerta.
-        if(nfcAdapter!= null)
-            nfcAdapter.enableForegroundDispatch(this, pendingIntent, nfcIntentFilter, null);
+        nfcAdapter.enableForegroundDispatch(this, pendingIntent, nfcIntentFilter, null);
 
         onNewIntent(intent);
     }
