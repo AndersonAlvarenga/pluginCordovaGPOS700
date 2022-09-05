@@ -577,7 +577,7 @@ public class GertecPrinter {
         return "Desativado";
     }
 
-    public String contactless(){
+    public String lerCartao(){
         final GEDI_CL_st_ISO_PollingInfo[] pollingInfo = new GEDI_CL_st_ISO_PollingInfo[1];
         final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
         String UID;
