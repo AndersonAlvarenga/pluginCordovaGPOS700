@@ -541,6 +541,11 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
+    //Inicio Métodos Pagamento StarGerLib
+
+
+    //Fim metodos
+
 
     //Inicio Metodos Contactless
     public String ativarLeituraICL(){
@@ -594,7 +599,13 @@ public class GertecPrinter {
 
         String UID;
         try {
-            pollingInfo= icl.ISO_Polling(10000);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pollingInfo= icl.ISO_Polling(10000);
+                }
+            }).start();
+
         }catch (GediException e ){
             return e.getMessage();
         }catch (Exception e) {
