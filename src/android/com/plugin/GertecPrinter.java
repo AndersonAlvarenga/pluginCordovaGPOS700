@@ -542,11 +542,82 @@ public class GertecPrinter {
 
     //MetodosTesting
 
-    //Ativado ICL
+    //Inicio Metodos Contactless
     public String onICl(){
+        try {
+            iCl = GEDI.getInstance().getCL();
 
-return "ok";
+        } catch (Exception e) {
+            return "getCL - FAIL - " + e.getMessage();
+        }
+
+        try {
+            iCl.PowerOn();
+        } catch (Exception e) {
+            return "iCl.PowerOn - FAIL - " + e.getMessage();
+        }
+
+        return "Ativado";
     }
+
+    public String offICl(){
+        try {
+            iCl = GEDI.getInstance().getCL();
+
+        } catch (Exception e) {
+            return "getCL - FAIL - " + e.getMessage();
+        }
+
+        try {
+            iCl.PowerOff();
+        } catch (Exception e) {
+            return "iCl.PowerOff - FAIL - " + e.getMessage();
+        }
+
+        return "Desativado";
+    }
+
+    public String contactless(){
+        final GEDI_CL_st_ISO_PollingInfo[] pollingInfo = new GEDI_CL_st_ISO_PollingInfo[1];
+        final GEDI_CL_st_MF_Key key = new GEDI_CL_st_MF_Key();
+        String UID;
+        try {
+            pollingInfo[0] = iCl.ISO_Polling(5 * 1000);
+        } catch (Exception e) {
+            // TODO: handle exception
+            return e.getMessage();
+        }
+        /*byte[] abUID = pollingInfo[0].abUID;
+        UID = arrayBytesToString(abUID);
+        key.abValue = new byte[]{0xf, 0xf, 0xf, 0xf};
+        key.abValue = new byte[]{0x0f, 0x1a, 0x2c, 0x33}; //Cartão Gertec
+        key.abValue = new byte[]{(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF}; // Cartão Cliente
+        key.eType = GEDI_CL_e_MF_KeyType.KEY_A;
+        byte[] blockInfo = null;*/
+        return "OK";
+    }
+
+
+    public static String arrayBytesToString(byte[] bValues) {
+
+        StringBuilder sbValues = new StringBuilder();
+        for (byte b : bValues) {
+            sbValues.append(String.format("%02X ", b).replace(" ", ""));
+        }
+        return sbValues.toString();
+    }
+
+    public static byte[] hexStringToByteArray(String s) {
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i + 1), 16));
+        }
+        return data;
+    }
+
+
+    //Fim metodos Contactless
 
 
     //Metodos ISmart

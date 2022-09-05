@@ -122,23 +122,6 @@ public class MainActivity extends CordovaPlugin {
             });
             return true;
         }
-        if (action.equals("contactless")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = nfcGedi.LerCard();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-
-            return true;
-        }
-
         if (action.equals("setSmartCardPowerOff")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
@@ -330,13 +313,45 @@ public class MainActivity extends CordovaPlugin {
 
         //Chamadas Contactell
 
-        if (action.equals("onICL")) {
-            cordova.getThreadPool().execute(new Runnable() {
+        if (action.equals("onICl")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
-                    intent = null;
                     try {
-                        intent = new Intent(context, NFCGedi.class);
-                        cordova.getActivity().startActivity(intent);
+                        status = gertecPrinter.onICl();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+
+        if (action.equals("offICl")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = gertecPrinter.offICl();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+
+        if (action.equals("contactless")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = gertecPrinter.contactless();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
