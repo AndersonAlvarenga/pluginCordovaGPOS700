@@ -542,16 +542,7 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
-    //Inicio Métodos Contactless EasyLayer
-
-    public String teste(){
-        ContactLessCard con = ContactLessCard;
-        byte[] retorno = con.connect(10000);
-        return "ok";
-    }
-
-
-    //Fim metodos
+    
 
 
     //Inicio Metodos Contactless
