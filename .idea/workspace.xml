@@ -64,7 +64,7 @@
       <breakpoints>
         <line-breakpoint suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
-          <line>763</line>
+          <line>762</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="java-line">
@@ -136,11 +136,6 @@
           <url>file://$PROJECT_DIR$/src/android/com/plugin/NFCId.java</url>
           <line>61</line>
           <option name="timeStamp" value="121" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
-          <line>547</line>
-          <option name="timeStamp" value="122" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
