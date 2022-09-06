@@ -545,7 +545,7 @@ public class GertecPrinter {
     //Inicio Métodos Contactless EasyLayer
 
     public String teste(){
-        ContactLessCard con;
+        ContactLessCard con = ContactLessCard;
         byte[] retorno = con.connect(10000);
         return "ok";
     }
