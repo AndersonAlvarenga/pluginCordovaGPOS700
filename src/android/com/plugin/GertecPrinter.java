@@ -659,8 +659,13 @@ public class GertecPrinter {
                 System.out.println("iSmart.Status- FAIL - " + e.getMessage());
             }
         }
-        resetEMV = iSmart.ResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
-        warmReset = iSmart.WarmResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
+        try{
+            resetEMV = iSmart.ResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
+            warmReset = iSmart.WarmResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
+        }catch (GediException e){
+
+        }
+
 
         return arrayBytesToString(resetEMV.abATR);
     }
