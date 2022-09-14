@@ -7,7 +7,6 @@
     <list default="true" id="6aeec4bf-f21c-418a-a722-b581b0e3d37a" name="Changes" comment="Alteração no metodo Ismart para retorno cartão">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +23,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DEBUGGABLE_DEVICE" value="gertec-gpos700x-0123abcd" />
-    <property name="DEBUGGABLE_PROCESS" value="br.com.superverdemar.beta.TesteImpresso" />
+    <property name="DEBUGGABLE_PROCESS" value="com.verdemar.pdvmovel" />
     <property name="DEBUGGER_ID" value="Java" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -70,7 +69,7 @@
       <breakpoints>
         <line-breakpoint suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
-          <line>762</line>
+          <line>729</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="java-line">

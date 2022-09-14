@@ -51,6 +51,9 @@ import br.com.gertec.gedi.structs.GEDI_CL_st_MF_Key;
 import br.com.gertec.gedi.enums.GEDI_CL_e_MF_KeyType;
 import br.com.gertec.easylayer.contactless.ContactLessCard;
 import br.com.gertec.gedi.structs.GEDI_SMART_st_ResetInfo;
+
+
+
 public class GertecPrinter {
   // Definições
     private final String IMPRESSORA_ERRO = "Impressora com erro.";
@@ -87,6 +90,9 @@ public class GertecPrinter {
     //Variaveis Pagamento
     private ISMART iSmart;
     private StringBuilder sb;
+    private GEDI_SMART_st_ResetInfo resetEMV;
+    private GEDI_SMART_st_ResetInfo warmResetEMV;
+    private int contadorTesteCartao =10;
 
     // Classe de configuração da impressão
     private ConfigPrint configPrint;
@@ -640,56 +646,55 @@ public class GertecPrinter {
 
 
     //Metodos ISmart
-    public String checkISmart(){
-        GEDI_SMART_st_ResetInfo resetEMV;
-        GEDI_SMART_st_ResetInfo warmReset;
-        sb = new StringBuilder();
-        for (GEDI_SMART_e_Slot cd : GEDI_SMART_e_Slot.values()) {
+    public void powerOff() {
+        iSmart = GEDI.getInstance().getSMART();
+        try {
+            iSmart.PowerOff(GEDI_SMART_e_Slot.USER);
+        } catch (GediException e) {
+            e.printStackTrace();
+        }
+    }
+    public GEDI_SMART_e_Status status(GEDI_SMART_e_Slot eSlot) {
+        try {
+            return iSmart.Status(eSlot);
+        } catch (GediException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public void gedi_SmartCard() {
+        try {
 
             try {
-
-                GEDI_SMART_e_Status status = iSmart.Status(cd);
-                final String r = "Status: "+status;
-
-
-                sb.append(r);
-
-
-            } catch (Exception e) {
-                System.out.println("iSmart.Status- FAIL - " + e.getMessage());
-            }
-        }
-        try{
-            resetEMV = iSmart.ResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
-            warmReset = iSmart.WarmResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
-        }catch (GediException e){
-
-        }
-
-
-        return arrayBytesToString(resetEMV.abATR);
-    }
-    public String setSmartCardPowerOff(){
-        try {
-            iSmart = GEDI.getInstance().getSMART();
-        } catch (Exception e) {
-            return "getSMART FAIL";
-        }
-
-        try {
-            for (GEDI_SMART_e_Slot c : GEDI_SMART_e_Slot.values()) {
-                try{
-                    iSmart.PowerOff(c);
-                }catch(Exception e){
-
+                for (String a = status(GEDI_SMART_e_Slot.USER).toString(); !a.equals("PRESENT") && this.contadorTesteCartao > 0; a = status(GEDI_SMART_e_Slot.USER).toString()) {
                 }
+                this.resetEMV = iSmart.ResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
+                this.warmResetEMV = iSmart.WarmResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
+            } catch (GediException e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            return e.getMessage();
-        }  
 
-        
-        return "Ativado";
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+
+    }
+    public static String byteArrayToHexString(byte[] in) {
+        StringBuilder builder = new StringBuilder();
+        if (in != null) {
+            byte[] var2 = in;
+            int var3 = in.length;
+            for (int var4 = 0; var4 < var3; var4++) {
+                builder.append(String.format("%02X", new Object[]{Byte.valueOf(var2[var4])}));
+            }
+        }
+        return builder.toString();
+    }
+
+    public String getCard(){
+        powerOff();
+        gedi_SmartCard();
+        return byteArrayToHexString(resetEMV.abATR);
     }
 
 
