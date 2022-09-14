@@ -44,12 +44,13 @@ import br.com.gertec.gedi.interfaces.ICL;
 import br.com.gertec.gedi.enums.GEDI_LED_e_Id;
 import br.com.gertec.gedi.interfaces.ISMART;
 import br.com.gertec.gedi.enums.GEDI_SMART_e_Slot;
+import br.com.gertec.gedi.enums.GEDI_SMART_e_Voltage;
 import br.com.gertec.gedi.enums.GEDI_SMART_e_Status;
 import br.com.gertec.gedi.structs.GEDI_CL_st_ISO_PollingInfo;
 import br.com.gertec.gedi.structs.GEDI_CL_st_MF_Key;
 import br.com.gertec.gedi.enums.GEDI_CL_e_MF_KeyType;
 import br.com.gertec.easylayer.contactless.ContactLessCard;
-
+import br.com.gertec.gedi.structs.GEDI_SMART_st_ResetInfo;
 public class GertecPrinter {
   // Definições
     private final String IMPRESSORA_ERRO = "Impressora com erro.";
@@ -542,7 +543,7 @@ public class GertecPrinter {
     }
 
     //MetodosTesting
-    
+
 
 
     //Inicio Metodos Contactless
@@ -640,7 +641,8 @@ public class GertecPrinter {
 
     //Metodos ISmart
     public String checkISmart(){
-        
+        GEDI_SMART_st_ResetInfo resetEMV;
+        GEDI_SMART_st_ResetInfo warmReset;
         sb = new StringBuilder();
         for (GEDI_SMART_e_Slot cd : GEDI_SMART_e_Slot.values()) {
 
@@ -657,13 +659,14 @@ public class GertecPrinter {
                 System.out.println("iSmart.Status- FAIL - " + e.getMessage());
             }
         }
+        resetEMV = iSmart.ResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
+        warmReset = iSmart.WarmResetEMV(GEDI_SMART_e_Slot.USER, GEDI_SMART_e_Voltage.VOLTAGE_5V);
 
-        return "SB: "+sb.toString();
+        return arrayBytesToString(resetEMV.abATR);
     }
     public String setSmartCardPowerOff(){
         try {
             iSmart = GEDI.getInstance().getSMART();
-            
         } catch (Exception e) {
             return "getSMART FAIL";
         }
