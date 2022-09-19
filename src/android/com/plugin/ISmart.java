@@ -8,6 +8,7 @@ import br.com.gertec.gedi.enums.GEDI_SMART_e_Slot;
 import br.com.gertec.gedi.enums.GEDI_SMART_e_Voltage;
 import br.com.gertec.gedi.enums.GEDI_SMART_e_Status;
 import br.com.gertec.gedi.exceptions.GediException;
+import br.com.gertec.gedi.structs.GEDI_SMART_st_ResetInfo;
 
 public class ISmart {
     private ISMART iSmart;

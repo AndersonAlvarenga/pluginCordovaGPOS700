@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aeec4bf-f21c-418a-a722-b581b0e3d37a" name="Changes" comment="Alteração no metodo Ismart para retorno cartão">
-      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/ISmart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/Printer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/Printer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/ISmart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/ISmart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,11 +227,6 @@
           <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
           <line>393</line>
           <option name="timeStamp" value="150" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/android/com/plugin/ISmart.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="151" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
           <url>file://$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java</url>
