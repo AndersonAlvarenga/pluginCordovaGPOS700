@@ -1,5 +1,6 @@
 package com.plugin;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,6 +34,7 @@ public class Printer {
     private ConfigPrint configPrint;
     private Typeface typeface;
     private Context context;
+    private Activity activity;
 
     public Printer(Context context){
         this.context = context;
