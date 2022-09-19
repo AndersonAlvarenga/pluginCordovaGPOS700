@@ -267,6 +267,61 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
+        //Métodos Impressão
+        if (action.equals("imprimir")) {
+            try {
+                print.getStatusImpressora();
+                if (print.isImpressoraOK()) {
+                    JSONObject params = args.getJSONObject(0);
+                    String tipoImpressao = params.getString("tipoImpressao");
+
+                    switch (tipoImpressao) {
+                        case "Texto":
+                            mensagem = params.getString("mensagem");
+                            String alinhar = params.getString("alinhar");
+                            int size = params.getInt("size");
+                            String fontFamily = params.getString("font");
+                            Boolean opNegrito = params.getBoolean("opNegrito");
+                            Boolean opItalico = params.getBoolean("opItalico");
+                            Boolean opSublinhado = params.getBoolean("opSublinhado");
+
+                            print.confgPrint(opItalico,opSublinhado,opNegrito,size,fontFamily,alinhar);
+                            print.imprimeTexto(mensagem);
+                            print.ImpressoraOutput();
+                            break;
+                        case "TodasFuncoes":
+                            ImprimeTodasAsFucoes();
+                            break;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                callbackContext.error("Erro " + e.getMessage());
+            }
+            callbackContext.success("Adicionado ao buffer");
+            return true;
+        }
+        if (action.equals("impressoraOutput")) {
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    try {
+                        JSONObject params = args.getJSONObject(0);
+                        if (params.has("avancaLinha")) {
+                            pulaLinha = params.getInt("avancaLinha");
+                            print.avancaLinha(pulaLinha);
+                        }
+                        gertecPrinter.ImpressoraOutput();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                    callbackContext.success("Buffer impresso");
+                }
+            });
+            return true;
+        }
+
+
         if (action.equals("checkISmart")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
@@ -283,77 +338,9 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
-        if (action.equals("imprimir")) {
-            try {
-                gertecPrinter.getStatusImpressora();
-                if (gertecPrinter.isImpressoraOK()) {
-                    JSONObject params = args.getJSONObject(0);
-                    String tipoImpressao = params.getString("tipoImpressao");
-                    
-                    switch (tipoImpressao) {
-                        case "Texto":
-                            mensagem = params.getString("mensagem");
-                            String alinhar = params.getString("alinhar");
-                            int size = params.getInt("size");
-                            String fontFamily = params.getString("font");
-                            Boolean opNegrito = params.getBoolean("opNegrito");
-                            Boolean opItalico = params.getBoolean("opItalico");
-                            Boolean opSublinhado = params.getBoolean("opSublinhado");
 
-                            print.confgPrint(opItalico,opSublinhado,opNegrito,size,fontFamily,alinhar);
-                            print.imprimeTexto(mensagem);
 
-                            break;
 
-                        case "Imagem":
-                            configPrint.setiWidth(400);
-                            configPrint.setiHeight(800);
-                            gertecPrinter.setConfigImpressao(configPrint);
-                            gertecPrinter.imprimeImagem("invoice");
-                            break;
-                        
-                        case "CodigoDeBarra":
-                            mensagem = params.getString("mensagem");
-                            int height = params.getInt("height");
-                            int width = params.getInt("width");
-                            String barCode = params.getString("barCode");
-                            configPrint.setAlinhamento("CENTER");
-                            gertecPrinter.setConfigImpressao(configPrint);
-                            gertecPrinter.imprimeBarCodeIMG(mensagem, height, width, barCode);
-                            break;
-                        
-                        case "TodasFuncoes":
-                            ImprimeTodasAsFucoes();
-                            break;
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                callbackContext.error("Erro " + e.getMessage());
-            }
-            callbackContext.success("Adicionado ao buffer");
-            return true;
-        }
-
-        if (action.equals("impressoraOutput")) {
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    try {
-                        JSONObject params = args.getJSONObject(0);
-                        if (params.has("avancaLinha")) { 
-                            pulaLinha = params.getInt("avancaLinha"); 
-                            gertecPrinter.avancaLinha(pulaLinha);
-                        }
-                        gertecPrinter.ImpressoraOutput();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                    callbackContext.success("Buffer impresso");
-                }
-            }); 
-            return true;
-        }
 
         if (action.equals("leitorCodigo1")) {
             cordova.getActivity().runOnUiThread(new Runnable() {

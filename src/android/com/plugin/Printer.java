@@ -3,6 +3,7 @@ package com.plugin;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.util.Log;
 
 import br.com.gertec.gedi.GEDI;
 import br.com.gertec.gedi.enums.GEDI_PRNTR_e_Status;
@@ -39,27 +40,92 @@ public class Printer {
 
     }
 
+    public boolean isImpressoraOK(){
+
+        if(status.getValue() == 0 ){
+            return true;
+        }
+        return false;
+    }
+
+    public String getStatusImpressora() throws GediException {
+        try {
+            ImpressoraInit();
+            this.status = this.iPrint.Status();
+        } catch (GediException e) {
+            throw new GediException(e.getErrorCode());
+        }
+
+        return traduzStatusImpressora(this.status);
+    }
+
     public void imprimeTexto(String texto) throws Exception {
         getStatusImpressora();
         try{
             if (!isImpressoraOK()) {
                 throw new Exception(IMPRESSORA_ERRO);
             }
-
             sPrintLine(texto);
-            this.ImpressoraOutput();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
 
+    /**
+     * Método que faz a finalizacao do objeto iPrint
+     *
+     * @throws GediException = retorno o código do erro.
+     *
+     * */
+    public void ImpressoraOutput() throws GediException {
+        try {
+            if( this.iPrint != null  ){
+                this.iPrint.Output();
+                isPrintInit = false;
+            }
+        } catch (GediException e) {
+            e.printStackTrace();
+            throw new GediException(e.getErrorCode());
+        }
+    }
+
+    /**
+     * Método que faz o avanço de linhas após uma impressão.
+     *
+     * @param linhas = Número de linhas que dever ser pulado após a impressão.
+     *
+     * @throws GediException = retorna o código do erro.
+     *
+     * @apiNote = Esse método não deve ser chamado dentro de um FOR ou WHILE,
+     * o número de linhas deve ser sempre passado no atributo do método.
+     *
+     * */
+    public void avancaLinha(int linhas) throws GediException {
+        try {
+            if(linhas > 0){
+                this.iPrint.DrawBlankLine(linhas);
+            }
+        } catch (GediException e) {
+            throw new GediException(e.getErrorCode());
+        }
+    }
+
+    public void confgPrint(boolean isItalic,boolean isSublinhado,boolean isNegrito,int fontSize,String font,String alinhamento){
+        this.configPrint.setItalico(isItalic);
+        this.configPrint.setSublinhado(isSublinhado);
+        this.configPrint.setNegrito(isNegrito);
+        this.configPrint.setTamanho(fontSize);
+        this.configPrint.setFonte(font);
+        this.configPrint.setAlinhamento(alinhamento);
+        this.setConfigImpressao(this.configPrint);
+    }
 
     /**
      * Método que recebe a configuração para ser usada na impressão
      * @param config  = Classe {@link ConfigPrint} que contém toda a configuração
      *                  para a impressão
      * */
-    public void setConfigImpressao(ConfigPrint config) {
+    private void setConfigImpressao(ConfigPrint config) {
 
         this.configPrint = config;
 
@@ -107,41 +173,7 @@ public class Printer {
         this.stringConfig.paint.setTypeface(this.typeface);
     }
 
-    public void confgPrint(
-                            boolean isItalic,
-                            boolean isSublinhado,
-                            boolean isNegrito,
-                            int fontSize,
-                            String font,
-                            String alinhamento){
-        this.configPrint.setItalico(isItalic);
-        this.configPrint.setSublinhado(isSublinhado);
-        this.configPrint.setNegrito(isNegrito);
-        this.configPrint.setTamanho(fontSize);
-        this.configPrint.setFonte(font);
-        this.configPrint.setAlinhamento(alinhamento);
-        this.setConfigImpressao(this.configPrint);
-    }
     //Metodos Auxiliares
-    public boolean isImpressoraOK(){
-
-        if(status.getValue() == 0 ){
-            return true;
-        }
-        return false;
-    }
-
-    public String getStatusImpressora() throws GediException {
-        try {
-            ImpressoraInit();
-            this.status = this.iPrint.Status();
-        } catch (GediException e) {
-            throw new GediException(e.getErrorCode());
-        }
-
-        return traduzStatusImpressora(this.status);
-    }
-
     /**
      * Método que faz a tradução do status atual da impressora.
      *
@@ -173,14 +205,13 @@ public class Printer {
         return retorno;
     }
 
-
     /**
      * Método que faz a inicialização da impressao
      *
      * @throws GediException = retorno o código do erro.
      *
      * */
-    public void ImpressoraInit() throws GediException {
+    private void ImpressoraInit() throws GediException {
         try {
             if( this.iPrint != null && !isPrintInit  ){
                 this.iPrint.Init();
@@ -188,27 +219,6 @@ public class Printer {
             }
         } catch (GediException e) {
             e.printStackTrace();
-            throw new GediException(e.getErrorCode());
-        }
-    }
-
-    /**
-     * Método que faz o avanço de linhas após uma impressão.
-     *
-     * @param linhas = Número de linhas que dever ser pulado após a impressão.
-     *
-     * @throws GediException = retorna o código do erro.
-     *
-     * @apiNote = Esse método não deve ser chamado dentro de um FOR ou WHILE,
-     * o número de linhas deve ser sempre passado no atributo do método.
-     *
-     * */
-    public void avancaLinha(int linhas) throws GediException {
-        try {
-            if(linhas > 0){
-                this.iPrint.DrawBlankLine(linhas);
-            }
-        } catch (GediException e) {
             throw new GediException(e.getErrorCode());
         }
     }
@@ -233,21 +243,5 @@ public class Printer {
             throw new GediException(e.getErrorCode());
         }
     }
-    /**
-     * Método que faz a finalizacao do objeto iPrint
-     *
-     * @throws GediException = retorno o código do erro.
-     *
-     * */
-    public void ImpressoraOutput() throws GediException {
-        try {
-            if( this.iPrint != null  ){
-                this.iPrint.Output();
-                isPrintInit = false;
-            }
-        } catch (GediException e) {
-            e.printStackTrace();
-            throw new GediException(e.getErrorCode());
-        }
-    }
+
 }
