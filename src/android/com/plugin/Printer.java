@@ -40,11 +40,12 @@ public class Printer {
     }
 
     public void imprimeTexto(String texto) throws Exception {
+        getStatusImpressora();
         try{
             if (!isImpressoraOK()) {
                 throw new Exception(IMPRESSORA_ERRO);
             }
-            getStatusImpressora();
+
             sPrintLine(texto);
             this.ImpressoraOutput();
         }catch (Exception e){
