@@ -10,6 +10,10 @@ import br.com.gertec.gedi.GEDI;
 import br.com.gertec.gedi.interfaces.IGEDI;
 import br.com.gertec.gedi.exceptions.GediException;
 import com.plugin.ConfigPrint;
+import br.com.gertec.gedi.interfaces.IPRNTR;
+import br.com.gertec.gedi.structs.GEDI_PRNTR_st_BarCodeConfig;
+import br.com.gertec.gedi.structs.GEDI_PRNTR_st_PictureConfig;
+import br.com.gertec.gedi.structs.GEDI_PRNTR_st_StringConfig;
 
 
 public class Printer {
