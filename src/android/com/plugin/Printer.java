@@ -14,6 +14,10 @@ import br.com.gertec.gedi.interfaces.IPRNTR;
 import br.com.gertec.gedi.structs.GEDI_PRNTR_st_BarCodeConfig;
 import br.com.gertec.gedi.structs.GEDI_PRNTR_st_PictureConfig;
 import br.com.gertec.gedi.structs.GEDI_PRNTR_st_StringConfig;
+import br.com.gertec.gedi.enums.GEDI_PRNTR_e_Alignment;
+import br.com.gertec.gedi.enums.GEDI_PRNTR_e_BarCodeType;
+import br.com.gertec.gedi.enums.GEDI_PRNTR_e_Status;
+
 
 
 public class Printer {
