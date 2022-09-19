@@ -55,6 +55,7 @@ public class MainActivity extends CordovaPlugin {
     private Beep beep;
     private Led led;
     private NFCGedi nfcGedi;
+    private Printer print;
     private CordovaWebView webView;
     private ConfigPrint configPrint = new ConfigPrint();
     private Intent intent;
@@ -67,6 +68,7 @@ public class MainActivity extends CordovaPlugin {
         gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
         beep = new Beep(cordova.getActivity().getApplicationContext());
         led = new Led(cordova.getActivity().getApplicationContext());
+        print = new Printer(cordova.getActivity().getApplicationContext());
     }
 
     public MainActivity() {
@@ -297,14 +299,10 @@ public class MainActivity extends CordovaPlugin {
                             Boolean opNegrito = params.getBoolean("opNegrito");
                             Boolean opItalico = params.getBoolean("opItalico");
                             Boolean opSublinhado = params.getBoolean("opSublinhado");
-                            configPrint.setItalico(opItalico);
-                            configPrint.setSublinhado(opSublinhado);
-                            configPrint.setNegrito(opNegrito);
-                            configPrint.setTamanho(size);
-                            configPrint.setFonte(fontFamily);
-                            configPrint.setAlinhamento(alinhar);
-                            gertecPrinter.setConfigImpressao(configPrint);
-                            gertecPrinter.imprimeTexto(mensagem);
+
+                            print.confgPrint(opItalico,opSublinhado,opNegrito,size,fontFamily,alinhar);
+                            print.imprimeTexto(mensagem);
+
                             break;
 
                         case "Imagem":
