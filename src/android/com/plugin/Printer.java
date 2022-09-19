@@ -44,6 +44,7 @@ public class Printer {
             if (!isImpressoraOK()) {
                 throw new Exception(IMPRESSORA_ERRO);
             }
+            getStatusImpressora();
             sPrintLine(texto);
             this.ImpressoraOutput();
         }catch (Exception e){
