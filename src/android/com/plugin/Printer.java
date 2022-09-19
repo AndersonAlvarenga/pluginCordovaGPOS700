@@ -32,8 +32,10 @@ public class Printer {
     private GEDI_PRNTR_e_Status status;
     private ConfigPrint configPrint;
     private Typeface typeface;
+    private Context context;
 
     public Printer(Context context){
+        this.context = context;
         new Thread(() -> {
             GEDI.init(context);
             this.iGedi = GEDI.getInstance(context);
