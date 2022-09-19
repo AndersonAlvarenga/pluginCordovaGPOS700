@@ -6,7 +6,7 @@ import android.util.Log;
 import br.com.gertec.gedi.GEDI;
 import br.com.gertec.gedi.interfaces.IGEDI;
 import br.com.gertec.gedi.interfaces.IAUDIO;
-import br.com.gertec.gedi.exceptions.GediException;
+
 
 public class Beep {
 
@@ -28,9 +28,9 @@ public class Beep {
     public String beep(){
         try {
             this.iAudio.Beep();
-        }catch (GediException e){
-            Log.e("Erro Beep",e.getMessege());
-            return e.getMessege();
+        }catch (Exception e){
+            Log.e("Erro Beep",e.getMessage());
+            return e.getMessage();
         }
         return "OK";
     }

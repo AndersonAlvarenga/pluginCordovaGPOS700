@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aeec4bf-f21c-418a-a722-b581b0e3d37a" name="Changes" comment="Alteração no metodo Ismart para retorno cartão">
-      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/Beep.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/Beep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/Beep.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +38,7 @@
     <property name="SHOW_ALL_PROCESSES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AndroidStudioProjects/PdvMovel" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
