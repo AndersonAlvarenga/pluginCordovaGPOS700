@@ -41,7 +41,7 @@ public class Led {
                 }
             }
         }
-        return "Erro";
+        return "OK";
     }
 
     public String ledOn() {
@@ -64,12 +64,12 @@ public class Led {
 
 
         }
-        return "Erro";
+        return "OK";
     }
 
     public String ledRedOn(){
         try {
-            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_RED,true);
+            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_RED,true);
         } catch (GediException e) {
             e.printStackTrace();
             return e.getErrorCode().name();
@@ -78,7 +78,7 @@ public class Led {
     }
     public String ledBlueOn(){
         try {
-            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_BLUE,true);
+            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_BLUE,true);
         } catch (GediException e) {
             e.printStackTrace();
             return e.getErrorCode().name();
@@ -87,7 +87,7 @@ public class Led {
     }
     public String ledGreenOn(){
         try {
-            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_GREEN,true);
+            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_GREEN,true);
         } catch (GediException e) {
             e.printStackTrace();
             return e.getErrorCode().name();
@@ -96,7 +96,7 @@ public class Led {
     }
     public String ledOrangeOn(){
         try {
-            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_ORANGE,true);
+            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_ORANGE,true);
         } catch (GediException e) {
             e.printStackTrace();
             return e.getErrorCode().name();
@@ -106,7 +106,7 @@ public class Led {
 
     public String ledRedOff(){
         try {
-            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_RED,false);
+            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_RED,false);
         } catch (GediException e) {
             e.printStackTrace();
             return e.getErrorCode().name();
@@ -115,7 +115,7 @@ public class Led {
     }
     public String ledBlueOff(){
         try {
-            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_BLUE,false);
+            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_BLUE,false);
         } catch (GediException e) {
             e.printStackTrace();
             return e.getErrorCode().name();
@@ -124,7 +124,7 @@ public class Led {
     }
     public String ledGreenOff(){
         try {
-            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_GREEN,false);
+            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_GREEN,false);
         } catch (GediException e) {
             e.printStackTrace();
             return e.getErrorCode().name();
@@ -133,7 +133,7 @@ public class Led {
     }
     public String ledOrangeOff(){
         try {
-            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_ORANGE,false);
+            iLed.Set(GEDI_LED_e_Id.GEDI_LED_ID_CONTACTLESS_ORANGE,false);
         } catch (GediException e) {
             e.printStackTrace();
             return e.getErrorCode().name();
