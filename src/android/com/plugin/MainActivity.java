@@ -52,6 +52,7 @@ public class MainActivity extends CordovaPlugin {
     private CallbackContext callbackContext;
     private CallbackContext scancallbackContext;
     private GertecPrinter gertecPrinter;
+    private Beep beep;
     private NFCGedi nfcGedi;
     private CordovaWebView webView;
     private ConfigPrint configPrint = new ConfigPrint();
@@ -63,6 +64,7 @@ public class MainActivity extends CordovaPlugin {
         super.initialize(cordova, webView);
         this.webView = webView;
         gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
+        beep = new Beep(cordova.getActivity().getApplicationContext());
     }
 
     public MainActivity() {
@@ -111,7 +113,7 @@ public class MainActivity extends CordovaPlugin {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     try {
-                        status = gertecPrinter.Beep();
+                        status = beep.beep();
                         Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
