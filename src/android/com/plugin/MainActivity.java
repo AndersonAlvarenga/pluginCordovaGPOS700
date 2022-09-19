@@ -55,6 +55,7 @@ public class MainActivity extends CordovaPlugin {
     private Beep beep;
     private Led led;
     private NFCGedi nfcGedi;
+    private ISmart ismart;
     private Printer print;
     private CordovaWebView webView;
     private ConfigPrint configPrint = new ConfigPrint();
@@ -69,6 +70,7 @@ public class MainActivity extends CordovaPlugin {
         beep = new Beep(cordova.getActivity().getApplicationContext());
         led = new Led(cordova.getActivity().getApplicationContext());
         print = new Printer(cordova.getActivity().getApplicationContext());
+        ismart = new ISmart(cordova.getActivity().getApplicationContext());
     }
 
     public MainActivity() {
@@ -326,7 +328,7 @@ public class MainActivity extends CordovaPlugin {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     try {
-                        status = gertecPrinter.getCard();
+                        status = ismart.getCard();
                         Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {

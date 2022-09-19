@@ -42,7 +42,7 @@
         <source-file src="src/android/com/plugin/Beep.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Led.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Printer.java" target-dir="src/android/com/plugin" />
-
+        <source-file src="src/android/com/plugin/ISmart.java" target-dir="src/android/com/plugin" />
 
         <source-file src="src/android/res/layout/nfcgedi.xml" target-dir="res/layout"/>
         <source-file src="src/android/res/layout/codigo_barras2.xml" target-dir="res/layout"/>

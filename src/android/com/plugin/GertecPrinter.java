@@ -679,7 +679,7 @@ public class GertecPrinter {
         }
 
     }
-    public static String byteArrayToHexString(byte[] in) {
+    public static String byteArrayToHexString1(byte[] in) {
         StringBuilder builder = new StringBuilder();
         if (in != null) {
             byte[] var2 = in;
@@ -694,7 +694,7 @@ public class GertecPrinter {
     public String getCard(){
         powerOff();
         gedi_SmartCard();
-        return byteArrayToHexString(resetEMV.abATR);
+        return byteArrayToHexString1(resetEMV.abATR);
     }
 
 
