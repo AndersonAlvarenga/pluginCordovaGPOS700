@@ -14,6 +14,7 @@ import br.com.gertec.gedi.structs.GEDI_PRNTR_st_StringConfig;
 public class Printer {
 
     private IPRNTR iPrint = null;
+    private IGEDI iGedi;
     private final String IMPRESSORA_ERRO = "Impressora com erro.";
     private GEDI_PRNTR_e_Status status;
     private static boolean isPrintInit = false;
