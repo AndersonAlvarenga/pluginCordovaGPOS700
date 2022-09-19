@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aeec4bf-f21c-418a-a722-b581b0e3d37a" name="Changes" comment="Alteração no metodo Ismart para retorno cartão">
-      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/Led.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/Led.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/Led.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

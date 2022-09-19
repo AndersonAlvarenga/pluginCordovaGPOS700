@@ -2,6 +2,7 @@ package com.plugin;
 
 import android.content.Context;
 import br.com.gertec.gedi.GEDI;
+import br.com.gertec.gedi.interfaces.IGEDI;
 import br.com.gertec.gedi.interfaces.ILED;
 import br.com.gertec.gedi.enums.GEDI_LED_e_Id;
 import br.com.gertec.gedi.exceptions.GediException;
