@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import com.google.zxing.WriterException;
 
 import br.com.gertec.gedi.GEDI;
 import br.com.gertec.gedi.interfaces.IGEDI;
