@@ -236,7 +236,7 @@ public class Printer {
         try {
             ImpressoraInit();
             this.iPrint.DrawStringExt(this.stringConfig, texto);
-            this.avancaLinha(configPrint.getAvancaLinhas());
+            this.avancaLinha(1);//configPrint.getAvancaLinhas());
             //ImpressoraOutput();
             return true;
         } catch (GediException e) {
