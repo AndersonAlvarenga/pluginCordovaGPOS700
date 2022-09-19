@@ -40,6 +40,7 @@
         <source-file src="src/android/com/plugin/NFCGedi.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/NFCId.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Beep.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/Led.java" target-dir="src/android/com/plugin" />
 
 
         <source-file src="src/android/res/layout/nfcgedi.xml" target-dir="res/layout"/>

@@ -53,6 +53,7 @@ public class MainActivity extends CordovaPlugin {
     private CallbackContext scancallbackContext;
     private GertecPrinter gertecPrinter;
     private Beep beep;
+    private Led led;
     private NFCGedi nfcGedi;
     private CordovaWebView webView;
     private ConfigPrint configPrint = new ConfigPrint();
@@ -65,6 +66,7 @@ public class MainActivity extends CordovaPlugin {
         this.webView = webView;
         gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
         beep = new Beep(cordova.getActivity().getApplicationContext());
+        led = new Led(cordova.getActivity().getApplicationContext());
     }
 
     public MainActivity() {
@@ -77,7 +79,7 @@ public class MainActivity extends CordovaPlugin {
         this.callbackContext = callbackContext;
         intent = null;
         
-
+        //Impressão
         if (action.equals("checarImpressora")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
@@ -94,11 +96,12 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
-        if (action.equals("led")) {
+        //Métodos Led
+        if (action.equals("ledOn")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     try {
-                        status = gertecPrinter. led();
+                        status = led.ledOn();
                         Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
@@ -109,6 +112,143 @@ public class MainActivity extends CordovaPlugin {
             });
             return true;
         }
+        if (action.equals("ledOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledRedOn")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledRedOn();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledBlueOn")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledBlueOn();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledGreenOn")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledGreenOn();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledOrangeOn")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledOrangeOn();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledRedOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledRedOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledBlueOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledBlueOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledGreenOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledGreenOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+        if (action.equals("ledOrangeOff")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        status = led.ledOrangeOff();
+                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
+                        callbackContext.success(status);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                }
+            });
+            return true;
+        }
+
+        //Metodo Beep
         if (action.equals("beep")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {

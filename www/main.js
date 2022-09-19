@@ -1,19 +1,55 @@
 var exec = require('cordova/exec');
 
+//Metodos Impressora
 exports.checarImpressora = function (success, error) {
     exec(success, error, 'MainActivity', 'checarImpressora');
 };
+exports.imprimir = function (params, success, error) {
+    exec(success, error, 'MainActivity', 'imprimir', [params]);
+};
+exports.impressoraOutput = function (params, success, error) {
+    exec(success, error, 'MainActivity', 'impressoraOutput', [params]);
+};
+
+//Metodo Beep
 exports.beep = function (success, error) {
     exec(success, error, 'MainActivity', 'beep');
 };
 
-exports.imprimir = function (params, success, error) {
-    exec(success, error, 'MainActivity', 'imprimir', [params]);
+//Metodos Led
+exports.ledOn = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledOn');
+};
+exports.ledOff = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledOff');
+};
+exports.ledRedOn = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledRedOn');
+};
+exports.ledBlueOn = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledBlueOn');
+};
+exports.ledGreenOn = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledGreenOn');
+};
+exports.ledOrangeOn = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledOrangeOn');
+};
+exports.ledRedOff = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledRedOff');
+};
+exports.ledBlueOff = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledBlueOff');
+};
+exports.ledGreenOff = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledGreenOff');
+};
+exports.ledOrangeOff = function (success, error) {
+    exec(success, error, 'MainActivity', 'ledOrangeOff');
 };
 
-exports.impressoraOutput = function (params, success, error) {
-    exec(success, error, 'MainActivity', 'impressoraOutput', [params]);
-};
+
+
 
 exports.leitorCodigo1 = function (tipoCode, success, error) {
     exec(success, error, 'MainActivity', 'leitorCodigo1', [tipoCode]);
@@ -30,9 +66,7 @@ exports.leitorNfcGedi = function (success, error) {
 exports.leitorNfcId = function (success, error) {
     exec(success, error, 'MainActivity', 'leitorNfcId');
 };
-exports.led = function (success, error) {
-    exec(success, error, 'MainActivity', 'led');
-};
+
 exports.setSmartCardPowerOff = function (success, error) {
     exec(success, error, 'MainActivity', 'setSmartCardPowerOff');
 };

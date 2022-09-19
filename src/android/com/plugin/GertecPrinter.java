@@ -798,31 +798,6 @@ public class GertecPrinter {
         return traduzStatusImpressora(this.status);
     }
 
-    /**
-     * Metodo para Fazer um beep na impressora
-     *
-     * @throws GediException = vai retorno o código do erro.
-     *
-     * @return String 
-     *
-     * */
-    
-    public String Beep() throws GediException {
-
-        try {
-            iAudio = GEDI.getInstance().getAUDIO();
-            try {
-                iAudio.Beep();
-                return "iAudio.Beep - OK";
-            } catch (Exception e) {
-                return "iAudio.Beep - FAIL";
-            }
-            
-        } catch (Exception e) {
-            return "getAUDIO - FAIL";
-        }
-    }
-
 
     //METODOS AUXILIARES
 
