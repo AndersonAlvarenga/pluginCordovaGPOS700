@@ -9,6 +9,7 @@ import br.com.gertec.gedi.interfaces.ICL;
 import br.com.gertec.gedi.structs.GEDI_CL_st_ISO_PollingInfo;
 import br.com.gertec.gedi.structs.GEDI_CL_st_MF_Key;
 import br.com.gertec.gedi.enums.GEDI_CL_e_MF_KeyType;
+import br.com.gertec.gedi.exceptions.GediException;
 
 public class Contactless {
 
