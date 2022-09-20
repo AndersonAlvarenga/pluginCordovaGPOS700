@@ -43,7 +43,6 @@ public class Contactless {
     public String onICl(){
         try {
             icl = GEDI.getInstance().getCL();
-            nfcAdapter = NfcAdapter.getDefaultAdapter(this.context);
 
         } catch (Exception e) {
             return "getCL - FAIL - " + e.getMessage();
