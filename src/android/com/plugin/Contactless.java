@@ -4,6 +4,7 @@ import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.widget.TextView;
 import br.com.gertec.gedi.GEDI;
+import br.com.gertec.gedi.interfaces.IGEDI;
 import br.com.gertec.gedi.interfaces.ICL;
 import br.com.gertec.gedi.structs.GEDI_CL_st_ISO_PollingInfo;
 import br.com.gertec.gedi.structs.GEDI_CL_st_MF_Key;
