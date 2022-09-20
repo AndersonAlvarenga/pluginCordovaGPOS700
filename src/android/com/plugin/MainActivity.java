@@ -69,7 +69,7 @@ public class MainActivity extends CordovaPlugin {
         led = new Led(cordova.getActivity().getApplicationContext());
         print = new Printer(cordova.getActivity().getApplicationContext());
         ismart = new ISmart(cordova.getActivity().getApplicationContext());
-        contactless = new ISmart(cordova.getActivity().getApplicationContext());
+        contactless = new Contactless(cordova.getActivity().getApplicationContext());
     }
 
     public MainActivity() {
