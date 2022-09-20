@@ -51,12 +51,11 @@ public class MainActivity extends CordovaPlugin {
     private ArrayList<String> arrayListTipo;
     private CallbackContext callbackContext;
     private CallbackContext scancallbackContext;
-    private GertecPrinter gertecPrinter;
     private Beep beep;
     private Led led;
-    private NFCGedi nfcGedi;
     private ISmart ismart;
     private Printer print;
+    private Contactless contactless;
     private CordovaWebView webView;
     private ConfigPrint configPrint = new ConfigPrint();
     private Intent intent;
@@ -66,11 +65,11 @@ public class MainActivity extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         this.webView = webView;
-        gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
         beep = new Beep(cordova.getActivity().getApplicationContext());
         led = new Led(cordova.getActivity().getApplicationContext());
         print = new Printer(cordova.getActivity().getApplicationContext());
         ismart = new ISmart(cordova.getActivity().getApplicationContext());
+        contactless = new ISmart(cordova.getActivity().getApplicationContext());
     }
 
     public MainActivity() {
@@ -95,6 +94,58 @@ public class MainActivity extends CordovaPlugin {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
                     }
+                }
+            });
+            return true;
+        }
+        if (action.equals("imprimir")) {
+            try {
+                print.getStatusImpressora();
+                if (print.isImpressoraOK()) {
+                    JSONObject params = args.getJSONObject(0);
+                    String tipoImpressao = params.getString("tipoImpressao");
+
+                    switch (tipoImpressao) {
+                        case "Texto":
+                            mensagem = params.getString("mensagem");
+                            String alinhar = params.getString("alinhar");
+                            int size = params.getInt("size");
+                            String fontFamily = params.getString("font");
+                            Boolean opNegrito = params.getBoolean("opNegrito");
+                            Boolean opItalico = params.getBoolean("opItalico");
+                            Boolean opSublinhado = params.getBoolean("opSublinhado");
+
+                            print.confgPrint(opItalico,opSublinhado,opNegrito,size,fontFamily,alinhar);
+                            print.imprimeTexto(mensagem);
+                            print.ImpressoraOutput();
+                            break;
+                        case "TodasFuncoes":
+                            ImprimeTodasAsFucoes();
+                            break;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                callbackContext.error("Erro " + e.getMessage());
+            }
+            callbackContext.success("Adicionado ao buffer");
+            return true;
+        }
+        if (action.equals("impressoraOutput")) {
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    try {
+                        JSONObject params = args.getJSONObject(0);
+                        if (params.has("avancaLinha")) {
+                            pulaLinha = params.getInt("avancaLinha");
+                            print.avancaLinha(pulaLinha);
+                        }
+                        gertecPrinter.ImpressoraOutput();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                    callbackContext.success("Buffer impresso");
                 }
             });
             return true;
@@ -269,61 +320,7 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
-        //Métodos Impressão
-        if (action.equals("imprimir")) {
-            try {
-                print.getStatusImpressora();
-                if (print.isImpressoraOK()) {
-                    JSONObject params = args.getJSONObject(0);
-                    String tipoImpressao = params.getString("tipoImpressao");
-
-                    switch (tipoImpressao) {
-                        case "Texto":
-                            mensagem = params.getString("mensagem");
-                            String alinhar = params.getString("alinhar");
-                            int size = params.getInt("size");
-                            String fontFamily = params.getString("font");
-                            Boolean opNegrito = params.getBoolean("opNegrito");
-                            Boolean opItalico = params.getBoolean("opItalico");
-                            Boolean opSublinhado = params.getBoolean("opSublinhado");
-
-                            print.confgPrint(opItalico,opSublinhado,opNegrito,size,fontFamily,alinhar);
-                            print.imprimeTexto(mensagem);
-                            print.ImpressoraOutput();
-                            break;
-                        case "TodasFuncoes":
-                            ImprimeTodasAsFucoes();
-                            break;
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                callbackContext.error("Erro " + e.getMessage());
-            }
-            callbackContext.success("Adicionado ao buffer");
-            return true;
-        }
-        if (action.equals("impressoraOutput")) {
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    try {
-                        JSONObject params = args.getJSONObject(0);
-                        if (params.has("avancaLinha")) {
-                            pulaLinha = params.getInt("avancaLinha");
-                            print.avancaLinha(pulaLinha);
-                        }
-                        gertecPrinter.ImpressoraOutput();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                    callbackContext.success("Buffer impresso");
-                }
-            });
-            return true;
-        }
-
-
+        //Método ISmart
         if (action.equals("checkISmart")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
@@ -340,147 +337,12 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
-
-
-
-
-        if (action.equals("leitorCodigo1")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        JSONObject params = args.getJSONObject(0);
-                        tipo = params.getString("barCode");
-                        switch (tipo) {
-                            case "EAN_8":
-                                titulo = "EAN 8";
-                                break;
-
-                            case "EAN_13":
-                                titulo = "EAN 13";
-                                break;
-
-                            case "EAN_14":
-                                titulo = "EAN 14";
-                                break;
-
-                            case "QR_CODE":
-                                titulo = "QrCode";
-                                break;
-                        }
-                        startCamera();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                    scancallbackContext = callbackContext;
-                }
-            });
-            return true;
-        }
-
-        if (action.equals("leitorCodigoV2")) { 
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    try {
-                        intent = new Intent(context, CodigoBarras2.class);
-                        cordova.getActivity().startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }  
-                }
-            });
-            return true;
-        }
-
-        if (action.equals("leitorNfcGedi")) {
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    intent = null;
-                    try {
-                        intent = new Intent(context, NFCGedi.class);
-                        cordova.getActivity().startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-
-        if (action.equals("leitorNfcId")) {
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    intent = null;
-                    try {
-                        intent = new Intent(context, NFCId.class);
-                        cordova.getActivity().startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-
-
-        //Chamadas Contactell
-
-        if (action.equals("onICL")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = gertecPrinter.onICl();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-
-        if (action.equals("offICl")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = gertecPrinter.offICl();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-
-        if (action.equals("lerCartao")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = gertecPrinter.lerCartao();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-
+        //Metodo Contacless
         if (action.equals("ativarLeituraICL")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     try {
-                        status = gertecPrinter.ativarLeituraICL();
+                        status = contactless.ativarLeituraICL();
                         Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
                         callbackContext.success(status);
                     } catch (Exception e) {
@@ -492,36 +354,6 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
-        if (action.equals("leitorNfcId")) {
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    intent = null;
-                    try {
-                        intent = new Intent(context, NFCId.class);
-                        cordova.getActivity().startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("offICl")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = gertecPrinter.offICl();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
 
         return false; // Returning false results in a "MethodNotFound" error.
     }

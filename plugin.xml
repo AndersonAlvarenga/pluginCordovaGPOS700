@@ -22,31 +22,19 @@
                 <param name="onload" value="true" />
             </feature>
         </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.NFCGedi"></activity>
-        </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.NFCId"></activity>
-        </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:name="com.plugin.CodigoBarras2"></activity>
-        </config-file>
+
+
 
         <!-- executable source code > -->
         <source-file src="src/android/com/plugin/MainActivity.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/ConfigPrint.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/GertecPrinter.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/CodigoBarras2.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/NFCGedi.java" target-dir="src/android/com/plugin" />
-        <source-file src="src/android/com/plugin/NFCId.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Beep.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Led.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/Printer.java" target-dir="src/android/com/plugin" />
         <source-file src="src/android/com/plugin/ISmart.java" target-dir="src/android/com/plugin" />
+        <source-file src="src/android/com/plugin/Contactless.java" target-dir="src/android/com/plugin" />
 
-        <source-file src="src/android/res/layout/nfcgedi.xml" target-dir="res/layout"/>
-        <source-file src="src/android/res/layout/codigo_barras2.xml" target-dir="res/layout"/>
-        <source-file src="src/android/res/layout/nfcid.xml" target-dir="res/layout"/>
+
         <config-file parent="/*" mode="merge" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.CAMERA" />
             <uses-feature android:name="android.hardware.camera" />

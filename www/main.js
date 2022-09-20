@@ -48,48 +48,13 @@ exports.ledOrangeOff = function (success, error) {
     exec(success, error, 'MainActivity', 'ledOrangeOff');
 };
 
-
-
-
-exports.leitorCodigo1 = function (tipoCode, success, error) {
-    exec(success, error, 'MainActivity', 'leitorCodigo1', [tipoCode]);
-};
-
-exports.leitorCodigoV2 = function (success, error) {
-    exec(success, error, 'MainActivity', 'leitorCodigoV2');
-};
-
-exports.leitorNfcGedi = function (success, error) {
-    exec(success, error, 'MainActivity', 'leitorNfcGedi');
-};
-
-exports.leitorNfcId = function (success, error) {
-    exec(success, error, 'MainActivity', 'leitorNfcId');
-};
-
-exports.setSmartCardPowerOff = function (success, error) {
-    exec(success, error, 'MainActivity', 'setSmartCardPowerOff');
-};
+//Metodo Ismart
 exports.checkISmart = function (success, error) {
     exec(success, error, 'MainActivity', 'checkISmart');
 };
-exports.onICL = function (success, error) {
-    exec(success, error, 'MainActivity', 'onICL');
-};
-exports.offICL = function (success, error) {
-    exec(success, error, 'MainActivity', 'offICL');
-};
-exports.lerCartao = function (success, error) {
-    exec(success, error, 'MainActivity', 'lerCartao');
-};
+//Método Contactless
 exports.ativarLeituraICL = function (success, error) {
     exec(success, error, 'MainActivity', 'ativarLeituraICL');
-};
-exports.leitorNfcId = function (success, error) {
-    exec(success, error, 'MainActivity', 'leitorNfcId');
-};
-exports.teset = function (success, error) {
-    exec(success, error, 'MainActivity', 'teste');
 };
 
 
