@@ -375,52 +375,52 @@ public class MainActivity extends CordovaPlugin {
         configPrint.setNegrito(true);
         configPrint.setTamanho(20);
         configPrint.setFonte("MONOSPACE");
-        gertecPrinter.setConfigImpressao(configPrint);
+        print.setConfigImpressao(configPrint);
         try {
-            gertecPrinter.getStatusImpressora();
+            print.getStatusImpressora();
             // Imprimindo Imagem
             configPrint.setiWidth(300);
             configPrint.setiHeight(130);
             configPrint.setAlinhamento("CENTER");
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("==[Iniciando Impressao Imagem]==");
-            gertecPrinter.imprimeImagem("gertec_2");
-            gertecPrinter.avancaLinha(10);
-            gertecPrinter.imprimeTexto("====[Fim Impressão Imagem]====");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("==[Iniciando Impressao Imagem]==");
+
+            print.avancaLinha(10);
+            print.imprimeTexto("====[Fim Impressão Imagem]====");
+            print.avancaLinha(10);
             // Fim Imagem
 
             // Impressão Centralizada
             configPrint.setAlinhamento("CENTER");
             configPrint.setTamanho(30);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("CENTRALIZADO");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("CENTRALIZADO");
+            print.avancaLinha(10);
             // Fim Impressão Centralizada
 
             // Impressão Esquerda
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(40);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("ESQUERDA");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("ESQUERDA");
+            print.avancaLinha(10);
             // Fim Impressão Esquerda
 
             // Impressão Direita
             configPrint.setAlinhamento("RIGHT");
             configPrint.setTamanho(20);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("DIREITA");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("DIREITA");
+            print.avancaLinha(10);
             // Fim Impressão Direita
 
             // Impressão Negrito
             configPrint.setNegrito(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("=======[Escrita Netrigo]=======");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("=======[Escrita Netrigo]=======");
+            print.avancaLinha(10);
             // Fim Impressão Negrito
 
             // Impressão Italico
@@ -428,9 +428,9 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setItalico(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("=======[Escrita Italico]=======");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("=======[Escrita Italico]=======");
+            print.avancaLinha(10);
             // Fim Impressão Italico
 
             // Impressão Italico
@@ -439,9 +439,9 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("======[Escrita Sublinhado]=====");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("======[Escrita Sublinhado]=====");
+            print.avancaLinha(10);
             // Fim Impressão Italico
 
             // Impressão BarCode 128
@@ -450,10 +450,9 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(false);
             configPrint.setAlinhamento("CENTER");
             configPrint.setTamanho(20);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("====[Codigo Barras CODE 128]====");
-            gertecPrinter.imprimeBarCode("12345678901234567890", 120, 120, "CODE_128");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("====[Codigo Barras CODE 128]====");
+            print.avancaLinha(10);
             // Fim Impressão BarCode 128
 
             // Impressão Normal
@@ -462,9 +461,9 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("=======[Escrita Normal]=======");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("=======[Escrita Normal]=======");
+            print.avancaLinha(10);
             // Fim Impressão Normal
 
             // Impressão Normal
@@ -473,11 +472,11 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("=========[BlankLine 50]=========");
-            gertecPrinter.avancaLinha(50);
-            gertecPrinter.imprimeTexto("=======[Fim BlankLine 50]=======");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("=========[BlankLine 50]=========");
+            print.avancaLinha(50);
+            print.imprimeTexto("=======[Fim BlankLine 50]=======");
+            print.avancaLinha(10);
             // Fim Impressão Normal
 
             // Impressão BarCode 13
@@ -486,27 +485,25 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(false);
             configPrint.setAlinhamento("CENTER");
             configPrint.setTamanho(20);
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("=====[Codigo Barras EAN13]=====");
-            gertecPrinter.imprimeBarCode("7891234567895", 120, 120, "EAN_13");
-            gertecPrinter.avancaLinha(10);
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("=====[Codigo Barras EAN13]=====");
+
+            print.avancaLinha(10);
             // Fim Impressão BarCode 128
 
             // Impressão BarCode 13
-            gertecPrinter.setConfigImpressao(configPrint);
-            gertecPrinter.imprimeTexto("===[Codigo QrCode Gertec LIB]==");
-            gertecPrinter.avancaLinha(10);
-            gertecPrinter.imprimeBarCode("Gertec Developer Partner LIB", 240, 240, "QR_CODE");
+            print.setConfigImpressao(configPrint);
+            print.imprimeTexto("===[Codigo QrCode Gertec LIB]==");
+            print.avancaLinha(10);
 
             configPrint.setNegrito(false);
             configPrint.setItalico(false);
             configPrint.setSublinhado(false);
             configPrint.setAlinhamento("CENTER");
             configPrint.setTamanho(20);
-            gertecPrinter.imprimeTexto("===[Codigo QrCode Gertec IMG]==");
-            gertecPrinter.imprimeBarCodeIMG("Gertec Developer Partner IMG", 240, 240, "QR_CODE");
+            print.imprimeTexto("===[Codigo QrCode Gertec IMG]==");
 
-            gertecPrinter.avancaLinha(100);
+            print.avancaLinha(100);
 
         } catch (Exception e) {
             e.printStackTrace();

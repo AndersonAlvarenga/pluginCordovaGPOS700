@@ -125,7 +125,7 @@ public class Printer {
      * @param config  = Classe {@link ConfigPrint} que contém toda a configuração
      *                  para a impressão
      * */
-    private void setConfigImpressao(ConfigPrint config) {
+    public void setConfigImpressao(ConfigPrint config) {
 
         this.configPrint = config;
 
