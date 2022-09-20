@@ -140,7 +140,7 @@ public class MainActivity extends CordovaPlugin {
                             pulaLinha = params.getInt("avancaLinha");
                             print.avancaLinha(pulaLinha);
                         }
-                        gertecPrinter.ImpressoraOutput();
+                        print.ImpressoraOutput();
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
