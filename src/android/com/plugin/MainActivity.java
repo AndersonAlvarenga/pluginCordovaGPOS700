@@ -359,7 +359,7 @@ public class MainActivity extends CordovaPlugin {
             JSONObject params = args.getJSONObject(0);
             String packet = params.getString("pacote");
             intent = new Intent(context.getPackageManager().getLaunchIntentForPackage("com.verdemar.pdvmovel"));
-            startActivityForResult(intent, REQ_CODE);
+            cordova.getActivity().startActivity(intent);
             return true;
         }
 
