@@ -56,5 +56,9 @@ exports.checkISmart = function (success, error) {
 exports.ativarLeituraICL = function (success, error) {
     exec(success, error, 'MainActivity', 'ativarLeituraICL');
 };
+//Clisitef
+exports.pagamento = function (success, error) {
+    exec(success, error, 'MainActivity', 'pagamento');
+};
 
 
