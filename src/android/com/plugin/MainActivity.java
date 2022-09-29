@@ -1,5 +1,6 @@
 package com.plugin;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +29,9 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -354,7 +358,12 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
+        //Abre App Pagamento
 
+        if(action.equals("pagamento")){
+            Intent i = new Intent("br.com.verdemar.pdvmovel.Pagamento.MainActivity");
+            cordova.getActivity().startActivity(i);
+        }
         return false; // Returning false results in a "MethodNotFound" error.
     }
 

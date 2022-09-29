@@ -5,8 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6aeec4bf-f21c-418a-a722-b581b0e3d37a" name="Changes" comment="Alteração no metodo Ismart para retorno cartão">
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/arm64-v8a/libclisitef.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/arm64-v8a/libcrypto.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/arm64-v8a/libgsurf_rsa.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/arm64-v8a/libssl.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/arm64-v8a/libtlswnb.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/armeabi-v7a/libclisitef.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/armeabi-v7a/libcrypto.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/armeabi-v7a/libgsurf_rsa.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/armeabi-v7a/libssl.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/armeabi-v7a/libtlswnb.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86/libclisitef.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86/libcrypto.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86/libgsurf_rsa.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86/libssl.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86/libtlswnb.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86_64/libclisitef.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86_64/libcrypto.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86_64/libgsurf_rsa.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86_64/libssl.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/com/plugin/jniLibs/x86_64/libtlswnb.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/libs/libgedi-1.16.13-gpos700-debug.aar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/libs/ppcomp-debug-1.30.3.aar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/res/drawable/background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/res/drawable/container.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/res/drawable/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/res/values/style.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/android/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/Printer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/Printer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/libs/SatGerLib.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/libs/android-easy-layer-debug.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/libs/libgedi-1.16.8-gpos700-payment-release.aar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +71,7 @@
     <property name="SHOW_ALL_PROCESSES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AndroidStudioProjects/PdvMovel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Gpos700X-main/Android_Nativo_Java/Android" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
