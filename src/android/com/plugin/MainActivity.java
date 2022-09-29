@@ -359,7 +359,7 @@ public class MainActivity extends CordovaPlugin {
         //Abre App Pagamento
 
         if(action.equals("pagamento")){
-            Intent i = new Intent("br.com.verdemar.pdvmovel.Pagamento.MainActivity");
+            Intent i = new Intent("br.com.verdemar.pdvmovel.MainActivity");
             cordova.getActivity().startActivity(i);
         }
         return false; // Returning false results in a "MethodNotFound" error.
