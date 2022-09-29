@@ -1,6 +1,5 @@
 package com.plugin;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,7 +29,6 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
 
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -53,11 +51,7 @@ public class MainActivity extends CordovaPlugin {
     private ArrayList<String> arrayListTipo;
     private CallbackContext callbackContext;
     private CallbackContext scancallbackContext;
-    private Beep beep;
-    private Led led;
-    private ISmart ismart;
-    private Printer print;
-    private Contactless contactless;
+    private GertecPrinter gertecPrinter;
     private CordovaWebView webView;
     private ConfigPrint configPrint = new ConfigPrint();
     private Intent intent;
@@ -67,11 +61,8 @@ public class MainActivity extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         this.webView = webView;
-        beep = new Beep(cordova.getActivity().getApplicationContext());
-        led = new Led(cordova.getActivity().getApplicationContext());
-        print = new Printer(cordova.getActivity().getApplicationContext());
-        ismart = new ISmart(cordova.getActivity().getApplicationContext());
-        contactless = new Contactless(cordova.getActivity().getApplicationContext());
+        gertecPrinter = new GertecPrinter(cordova.getActivity().getApplicationContext());
+        gertecPrinter.setConfigImpressao(configPrint);
     }
 
     public MainActivity() {
@@ -83,15 +74,14 @@ public class MainActivity extends CordovaPlugin {
         Context context = cordova.getActivity().getApplicationContext();
         this.callbackContext = callbackContext;
         intent = null;
-        
-        //Impressão
+
         if (action.equals("checarImpressora")) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     try {
-                        status = print.getStatusImpressora();
+                        status = gertecPrinter.getStatusImpressora();
                         Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
+                        callbackContext.success("OK");
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
@@ -100,13 +90,14 @@ public class MainActivity extends CordovaPlugin {
             });
             return true;
         }
+
         if (action.equals("imprimir")) {
             try {
-                print.getStatusImpressora();
-                if (print.isImpressoraOK()) {
+                gertecPrinter.getStatusImpressora();
+                if (gertecPrinter.isImpressoraOK()) {
                     JSONObject params = args.getJSONObject(0);
                     String tipoImpressao = params.getString("tipoImpressao");
-
+                    
                     switch (tipoImpressao) {
                         case "Texto":
                             mensagem = params.getString("mensagem");
@@ -116,11 +107,33 @@ public class MainActivity extends CordovaPlugin {
                             Boolean opNegrito = params.getBoolean("opNegrito");
                             Boolean opItalico = params.getBoolean("opItalico");
                             Boolean opSublinhado = params.getBoolean("opSublinhado");
-
-                            print.confgPrint(opItalico,opSublinhado,opNegrito,size,fontFamily,alinhar);
-                            print.imprimeTexto(mensagem);
-                            print.ImpressoraOutput();
+                            configPrint.setItalico(opItalico);
+                            configPrint.setSublinhado(opSublinhado);
+                            configPrint.setNegrito(opNegrito);
+                            configPrint.setTamanho(size);
+                            configPrint.setFonte(fontFamily);
+                            configPrint.setAlinhamento(alinhar);
+                            gertecPrinter.setConfigImpressao(configPrint);
+                            gertecPrinter.imprimeTexto(mensagem);
                             break;
+
+                        case "Imagem":
+                            configPrint.setiWidth(400);
+                            configPrint.setiHeight(800);
+                            gertecPrinter.setConfigImpressao(configPrint);
+                            gertecPrinter.imprimeImagem("invoice");
+                            break;
+                        
+                        case "CodigoDeBarra":
+                            mensagem = params.getString("mensagem");
+                            int height = params.getInt("height");
+                            int width = params.getInt("width");
+                            String barCode = params.getString("barCode");
+                            configPrint.setAlinhamento("CENTER");
+                            gertecPrinter.setConfigImpressao(configPrint);
+                            gertecPrinter.imprimeBarCodeIMG(mensagem, height, width, barCode);
+                            break;
+                        
                         case "TodasFuncoes":
                             ImprimeTodasAsFucoes();
                             break;
@@ -133,169 +146,83 @@ public class MainActivity extends CordovaPlugin {
             callbackContext.success("Adicionado ao buffer");
             return true;
         }
+
         if (action.equals("impressoraOutput")) {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     try {
                         JSONObject params = args.getJSONObject(0);
-                        if (params.has("avancaLinha")) {
-                            pulaLinha = params.getInt("avancaLinha");
-                            print.avancaLinha(pulaLinha);
+                        if (params.has("avancaLinha")) { 
+                            pulaLinha = params.getInt("avancaLinha"); 
+                            gertecPrinter.avancaLinha(pulaLinha);
                         }
-                        print.ImpressoraOutput();
+                        gertecPrinter.ImpressoraOutput();
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
                     }
                     callbackContext.success("Buffer impresso");
                 }
+            }); 
+            return true;
+        }
+
+        if (action.equals("leitorCodigo1")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        JSONObject params = args.getJSONObject(0);
+                        tipo = params.getString("barCode");
+                        switch (tipo) {
+                            case "EAN_8":
+                                titulo = "EAN 8";
+                                break;
+
+                            case "EAN_13":
+                                titulo = "EAN 13";
+                                break;
+
+                            case "EAN_14":
+                                titulo = "EAN 14";
+                                break;
+
+                            case "QR_CODE":
+                                titulo = "QrCode";
+                                break;
+                        }
+                        startCamera();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        callbackContext.error("Erro " + e.getMessage());
+                    }
+                    scancallbackContext = callbackContext;
+                }
             });
             return true;
         }
 
-        //Métodos Led
-        if (action.equals("ledOn")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
+        if (action.equals("leitorCodigoV2")) { 
+            cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     try {
-                        status = led.ledOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
+                        intent = new Intent(context, CodigoBarras2.class);
+                        cordova.getActivity().startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
-                    }
+                    }  
                 }
             });
             return true;
         }
-        if (action.equals("ledOff")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
+
+        if (action.equals("leitorNfcGedi")) {
+            cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
+                    intent = null;
                     try {
-                        status = led.ledOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("ledRedOn")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = led.ledRedOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("ledBlueOn")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = led.ledBlueOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("ledGreenOn")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = led.ledGreenOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("ledOrangeOn")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = led.ledOrangeOn();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("ledRedOff")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = led.ledRedOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("ledBlueOff")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = led.ledBlueOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("ledGreenOff")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = led.ledGreenOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-        if (action.equals("ledOrangeOff")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = led.ledOrangeOff();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
+                        intent = new Intent(context, NFCGedi.class);
+                        cordova.getActivity().startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
@@ -305,14 +232,13 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
-        //Metodo Beep
-        if (action.equals("beep")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
+        if (action.equals("leitorNfcId")) {
+            cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
+                    intent = null;
                     try {
-                        status = beep.beep();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
+                        intent = new Intent(context, NFCId.class);
+                        cordova.getActivity().startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                         callbackContext.error("Erro " + e.getMessage());
@@ -322,48 +248,6 @@ public class MainActivity extends CordovaPlugin {
             return true;
         }
 
-        //Método ISmart
-        if (action.equals("checkISmart")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = ismart.getCard();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-
-        //Metodo Contacless
-        if (action.equals("ativarLeituraICL")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    try {
-                        status = contactless.ativarLeituraICL();
-                        Toast.makeText(cordova.getActivity(), status, Toast.LENGTH_LONG).show();
-                        callbackContext.success(status);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        callbackContext.error("Erro " + e.getMessage());
-                    }
-                }
-            });
-            return true;
-        }
-
-        //Abre App Pagamento
-
-        if(action.equals("pagamento")){
-            JSONObject params = args.getJSONObject(0);
-            String intent = params.getString("intent");
-            Intent i = new Intent(intent);
-            cordova.getActivity().startActivity(i);
-        }
         return false; // Returning false results in a "MethodNotFound" error.
     }
 
@@ -384,52 +268,52 @@ public class MainActivity extends CordovaPlugin {
         configPrint.setNegrito(true);
         configPrint.setTamanho(20);
         configPrint.setFonte("MONOSPACE");
-        print.setConfigImpressao(configPrint);
+        gertecPrinter.setConfigImpressao(configPrint);
         try {
-            print.getStatusImpressora();
+            gertecPrinter.getStatusImpressora();
             // Imprimindo Imagem
             configPrint.setiWidth(300);
             configPrint.setiHeight(130);
             configPrint.setAlinhamento("CENTER");
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("==[Iniciando Impressao Imagem]==");
-
-            print.avancaLinha(10);
-            print.imprimeTexto("====[Fim Impressão Imagem]====");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("==[Iniciando Impressao Imagem]==");
+            gertecPrinter.imprimeImagem("gertec_2");
+            gertecPrinter.avancaLinha(10);
+            gertecPrinter.imprimeTexto("====[Fim Impressão Imagem]====");
+            gertecPrinter.avancaLinha(10);
             // Fim Imagem
 
             // Impressão Centralizada
             configPrint.setAlinhamento("CENTER");
             configPrint.setTamanho(30);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("CENTRALIZADO");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("CENTRALIZADO");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão Centralizada
 
             // Impressão Esquerda
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(40);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("ESQUERDA");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("ESQUERDA");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão Esquerda
 
             // Impressão Direita
             configPrint.setAlinhamento("RIGHT");
             configPrint.setTamanho(20);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("DIREITA");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("DIREITA");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão Direita
 
             // Impressão Negrito
             configPrint.setNegrito(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("=======[Escrita Netrigo]=======");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("=======[Escrita Netrigo]=======");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão Negrito
 
             // Impressão Italico
@@ -437,9 +321,9 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setItalico(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("=======[Escrita Italico]=======");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("=======[Escrita Italico]=======");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão Italico
 
             // Impressão Italico
@@ -448,9 +332,9 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("======[Escrita Sublinhado]=====");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("======[Escrita Sublinhado]=====");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão Italico
 
             // Impressão BarCode 128
@@ -459,9 +343,10 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(false);
             configPrint.setAlinhamento("CENTER");
             configPrint.setTamanho(20);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("====[Codigo Barras CODE 128]====");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("====[Codigo Barras CODE 128]====");
+            gertecPrinter.imprimeBarCode("12345678901234567890", 120, 120, "CODE_128");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão BarCode 128
 
             // Impressão Normal
@@ -470,9 +355,9 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("=======[Escrita Normal]=======");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("=======[Escrita Normal]=======");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão Normal
 
             // Impressão Normal
@@ -481,11 +366,11 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(true);
             configPrint.setAlinhamento("LEFT");
             configPrint.setTamanho(20);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("=========[BlankLine 50]=========");
-            print.avancaLinha(50);
-            print.imprimeTexto("=======[Fim BlankLine 50]=======");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("=========[BlankLine 50]=========");
+            gertecPrinter.avancaLinha(50);
+            gertecPrinter.imprimeTexto("=======[Fim BlankLine 50]=======");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão Normal
 
             // Impressão BarCode 13
@@ -494,25 +379,27 @@ public class MainActivity extends CordovaPlugin {
             configPrint.setSublinhado(false);
             configPrint.setAlinhamento("CENTER");
             configPrint.setTamanho(20);
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("=====[Codigo Barras EAN13]=====");
-
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("=====[Codigo Barras EAN13]=====");
+            gertecPrinter.imprimeBarCode("7891234567895", 120, 120, "EAN_13");
+            gertecPrinter.avancaLinha(10);
             // Fim Impressão BarCode 128
 
             // Impressão BarCode 13
-            print.setConfigImpressao(configPrint);
-            print.imprimeTexto("===[Codigo QrCode Gertec LIB]==");
-            print.avancaLinha(10);
+            gertecPrinter.setConfigImpressao(configPrint);
+            gertecPrinter.imprimeTexto("===[Codigo QrCode Gertec LIB]==");
+            gertecPrinter.avancaLinha(10);
+            gertecPrinter.imprimeBarCode("Gertec Developer Partner LIB", 240, 240, "QR_CODE");
 
             configPrint.setNegrito(false);
             configPrint.setItalico(false);
             configPrint.setSublinhado(false);
             configPrint.setAlinhamento("CENTER");
             configPrint.setTamanho(20);
-            print.imprimeTexto("===[Codigo QrCode Gertec IMG]==");
+            gertecPrinter.imprimeTexto("===[Codigo QrCode Gertec IMG]==");
+            gertecPrinter.imprimeBarCodeIMG("Gertec Developer Partner IMG", 240, 240, "QR_CODE");
 
-            print.avancaLinha(100);
+            gertecPrinter.avancaLinha(100);
 
         } catch (Exception e) {
             e.printStackTrace();
