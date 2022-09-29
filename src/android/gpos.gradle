@@ -26,8 +26,9 @@ dependencies {
     // Lib exclusiva para o GPOS700
     
     implementation(name: 'android-easy-layer-debug', ext: 'aar')
-    implementation(name: 'libgedi-1.16.8-gpos700-payment-release', ext: 'aar')
+    implementation(name: 'libgedi-1.16.13-gpos700-debug', ext: 'aar')
     implementation(name: 'SatGerLib', ext: 'aar')
+    implementation(name: 'ppcomp-debug-1.30.3', ext: 'aar')
 
 
 }
