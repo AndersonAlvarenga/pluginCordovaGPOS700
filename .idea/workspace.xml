@@ -5,8 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdf4ade8-9e17-45c1-8949-48e51e4a76b0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/CodigoBarras2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/GertecPrinter.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/com/plugin/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/NFCGedi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/com/plugin/NFCId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/gpos.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/gpos.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/libs/payment-1.14.10.181016.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/drawable/background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/drawable/container.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/drawable/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/layout/codigo_barras2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/layout/nfcgedi.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/layout/nfcid.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/values/style.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/android/res/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

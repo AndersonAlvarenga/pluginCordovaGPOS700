@@ -57,4 +57,8 @@ exports.ativarLeituraICL = function (success, error) {
     exec(success, error, 'MainActivity', 'ativarLeituraICL');
 };
 
+exports.pagamento = function (params, success, error) {
+    exec(success, error, 'MainActivity', 'pagamento', [params]);
+};
+
 
