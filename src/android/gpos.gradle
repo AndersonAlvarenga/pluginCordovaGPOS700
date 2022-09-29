@@ -24,6 +24,10 @@ dependencies {
     implementation 'com.google.zxing:core:3.2.0'
     
     // Lib exclusiva para o GPOS700
-    implementation(name: 'payment-1.14.10.181016', ext: 'aar')
+    
+    implementation(name: 'android-easy-layer-debug', ext: 'aar')
+    implementation(name: 'libgedi-1.16.8-gpos700-payment-release', ext: 'aar')
+    implementation(name: 'SatGerLib', ext: 'aar')
+
 
 }
