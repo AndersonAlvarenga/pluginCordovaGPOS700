@@ -96,6 +96,11 @@
           <line>78</line>
           <option name="timeStamp" value="154" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/android/com/plugin/MainActivity.java</url>
+          <line>361</line>
+          <option name="timeStamp" value="155" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
