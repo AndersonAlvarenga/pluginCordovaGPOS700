@@ -20,6 +20,7 @@
             <feature name="MainActivity">
                 <param name="android-package" value="com.plugin.MainActivity" />
                 <param name="onload" value="true" />
+
             </feature>
         </config-file>
 
